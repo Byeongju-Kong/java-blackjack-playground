@@ -1,6 +1,7 @@
 package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -38,5 +39,13 @@ class TrumpNumberTest {
                 Arguments.of(11, TrumpNumber.Q, "Q"),
                 Arguments.of(12, TrumpNumber.K, "K")
         );
+    }
+
+    @Test
+    @DisplayName("숫자가 A인지 여부를 반환한다.")
+    void isA() {
+        TrumpNumber trumpNumber = TrumpNumber.findBy(1);
+        boolean actual = trumpNumber.isA();
+        assertThat(actual).isTrue();
     }
 }
