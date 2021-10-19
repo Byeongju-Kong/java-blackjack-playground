@@ -16,7 +16,7 @@ class TrumpNumberTest {
     @DisplayName("Index를 값으로 Index에 해당하는 객체를 반환받는다.")
     @MethodSource("provideIndexAndTrumpNumber")
     void findBy(int index, TrumpNumber expectedTrumpNumber, String expectedValue) {
-        TrumpNumber actualTrumpNumber = TrumpNumber.findBy(index);
+        TrumpNumber actualTrumpNumber = TrumpNumber.indexOf(index);
         String actualValue = actualTrumpNumber.toString();
         assertAll(
                 () -> assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber),
@@ -44,7 +44,7 @@ class TrumpNumberTest {
     @Test
     @DisplayName("숫자가 A인지 여부를 반환한다.")
     void isA() {
-        TrumpNumber trumpNumber = TrumpNumber.findBy(1);
+        TrumpNumber trumpNumber = TrumpNumber.indexOf(1);
         boolean actual = trumpNumber.isA();
         assertThat(actual).isTrue();
     }

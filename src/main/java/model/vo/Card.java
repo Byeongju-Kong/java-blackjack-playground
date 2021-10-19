@@ -11,8 +11,8 @@ public class Card {
     }
 
     private Card(final int number, final int shapeIndex) {
-        this.shape = TrumpShape.findBy(shapeIndex);
-        this.number = TrumpNumber.findBy(number);
+        this.shape = TrumpShape.indexOf(shapeIndex);
+        this.number = TrumpNumber.indexOf(number);
     }
 
     public TrumpNumber getNumber() {

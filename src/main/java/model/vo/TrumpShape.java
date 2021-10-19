@@ -12,7 +12,7 @@ public enum TrumpShape {
         this.value = value;
     }
 
-    public static TrumpShape findBy(final int shapeIndex) {
+    public static TrumpShape indexOf(final int shapeIndex) {
         return Arrays.stream(TrumpShape.values())
                 .filter(trumpShape -> trumpShape.shapeIndex == shapeIndex)
                 .findFirst()
