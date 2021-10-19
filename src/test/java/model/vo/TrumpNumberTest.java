@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -47,5 +48,14 @@ class TrumpNumberTest {
         TrumpNumber trumpNumber = TrumpNumber.indexOf(1);
         boolean actual = trumpNumber.isA();
         assertThat(actual).isTrue();
+    }
+
+    @ParameterizedTest
+    @DisplayName("숫자가 J, Q, K 중 하나인지를 반환한다.")
+    @CsvSource({"10, true", "11, true", "12, true", "3, false"})
+    void isJQK(int numberIndex, boolean expected) {
+        TrumpNumber trumpNumber = TrumpNumber.indexOf(numberIndex);
+        boolean actual = trumpNumber.isJQK();
+        assertThat(actual).isEqualTo(expected);
     }
 }
