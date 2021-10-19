@@ -15,8 +15,8 @@ class CardTest {
     @DisplayName("트럼프숫자를 반환한다.")
     @MethodSource("provideNumberIndexAndTrumpNumber")
     void getNumber(int numberIndex, TrumpNumber expectedTrumpNumber) {
-        int anyShapeIndex = 1;
-        Card card = Card.generate(numberIndex, anyShapeIndex);
+        int shapeIndex = 1;
+        Card card = Card.generate(numberIndex, shapeIndex);
         TrumpNumber actualTrumpNumber = card.getNumber();
         assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber);
     }
