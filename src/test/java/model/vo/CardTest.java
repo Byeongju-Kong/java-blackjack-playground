@@ -1,6 +1,7 @@
 package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CardTest {
     @ParameterizedTest
     @DisplayName("트럼프숫자를 반환한다.")
-    @MethodSource("providenumberIndexAndTrumpNumber")
+    @MethodSource("provideNumberIndexAndTrumpNumber")
     void getNumber(int numberIndex, TrumpNumber expectedTrumpNumber) {
         int anyShapeIndex = 1;
         Card card = Card.generate(numberIndex, anyShapeIndex);
@@ -20,7 +21,7 @@ class CardTest {
         assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber);
     }
 
-    private static Stream<Arguments> providenumberIndexAndTrumpNumber() {
+    private static Stream<Arguments> provideNumberIndexAndTrumpNumber() {
         return Stream.of(
                 Arguments.of(1, TrumpNumber.A),
                 Arguments.of(2, TrumpNumber.TWO),
@@ -35,5 +36,14 @@ class CardTest {
                 Arguments.of(11, TrumpNumber.Q),
                 Arguments.of(12, TrumpNumber.K)
         );
+    }
+
+    @Test
+    @DisplayName("카드의 정보를 문자열에 담아 반환한다.")
+    void toString_provideCardInfo() {
+        Card card = Card.generate(1, 1);
+        String actual = card.toString();
+        String expected = "A스페이드";
+        assertThat(actual).isEqualTo(expected);
     }
 }
