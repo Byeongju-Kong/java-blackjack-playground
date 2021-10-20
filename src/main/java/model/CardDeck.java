@@ -4,17 +4,17 @@ import model.vo.Card;
 
 import java.util.*;
 
-public class CardProvider {
+public class CardDeck {
     private static final int KIND_OF_NUMBER = 12;
     private static final int KIND_OF_SHAPE = 4;
     private final List<Card> providedCars = new ArrayList<>();
     private final Random random = new Random();
 
-    protected CardProvider() {
+    protected CardDeck() {
     }
 
-    public static CardProvider shuffle() {
-        return new CardProvider();
+    public static CardDeck shuffle() {
+        return new CardDeck();
     }
 
     public Card provide() {

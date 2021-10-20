@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class CardProviderTest {
-    private CardProvider cardProvider;
+    private CardDeck cardProvider;
     private final Set<Card> providedCars = new HashSet<>();
     private final int[] indices = new int[]{1, 1, 2, 2, 3, 3};
     private int orderOfIndices = 0;
@@ -20,7 +20,7 @@ class CardProviderTest {
     @BeforeEach
     void setUp() {
         providedCars.add(Card.generate(1, 1));
-        cardProvider = new CardProvider() {
+        cardProvider = new CardDeck() {
             @Override
             protected int generateRandomIndex(final int boundary) {
                 return indices[orderOfIndices++];
