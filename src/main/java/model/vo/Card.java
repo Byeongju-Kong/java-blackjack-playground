@@ -19,6 +19,10 @@ public class Card {
         return number;
     }
 
+    public boolean isA() {
+        return number.isA();
+    }
+
     @Override
     public String toString() {
         return number.value() + shape.value();

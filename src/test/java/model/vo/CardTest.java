@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -45,5 +46,25 @@ class CardTest {
         String actual = card.toString();
         String expected = "A스페이드";
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("카드의 숫자가 A인지 반환한다.")
+    @MethodSource("provideNumberIndexAndIsA")
+    void isA(int numberIndex, boolean expected) {
+        int anyShapeIndex = 1;
+        Card card = Card.generate(numberIndex, anyShapeIndex);
+        boolean actual = card.isA();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideNumberIndexAndIsA() {
+        int numberIndexOfA = 1;
+        int anyNumberIndexOfNotA = 2;
+
+        return Stream.of(
+                Arguments.of(numberIndexOfA, true),
+                Arguments.of(anyNumberIndexOfNotA, false)
+        );
     }
 }
