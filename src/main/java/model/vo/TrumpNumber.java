@@ -29,8 +29,7 @@ public enum TrumpNumber {
         return this == J || this == Q || this == K;
     }
 
-    @Override
-    public String toString() {
+    public String value() {
         return value;
     }
 }

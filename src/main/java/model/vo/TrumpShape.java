@@ -19,8 +19,7 @@ public enum TrumpShape {
                 .orElseThrow(() -> new IllegalArgumentException("Index에 대응하는 모양이 없습니다."));
     }
 
-    @Override
-    public String toString() {
+    public String value() {
         return value;
     }
 }

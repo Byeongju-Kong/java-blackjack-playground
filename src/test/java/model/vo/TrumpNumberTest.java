@@ -18,7 +18,7 @@ class TrumpNumberTest {
     @MethodSource("provideIndexAndTrumpNumber")
     void findBy(int index, TrumpNumber expectedTrumpNumber, String expectedValue) {
         TrumpNumber actualTrumpNumber = TrumpNumber.indexOf(index);
-        String actualValue = actualTrumpNumber.toString();
+        String actualValue = actualTrumpNumber.value();
         assertAll(
                 () -> assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber),
                 () -> assertThat(actualValue).isEqualTo(expectedValue)
