@@ -39,8 +39,7 @@ public class Cards {
         values.stream()
                 .filter(card -> !card.getNumber().isA())
                 .forEach(card -> addNotA(card.getNumber()));
-        Card a = Card.generate(1, 1);
-        if (values.contains(a)) {
+        if (values.stream().anyMatch(Card::isA)) {
             addA();
         }
     }
