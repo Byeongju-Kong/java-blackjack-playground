@@ -8,6 +8,7 @@ import java.util.List;
 import static model.BlackJackStatus.*;
 
 public class Cards {
+    private static final int VALUE_OF_JQK = 10;
     private final List<Card> values;
     private int sumOfCardValues;
 
@@ -46,7 +47,7 @@ public class Cards {
 
     private void addNotA(TrumpNumber number) {
         if (number.isJQK()) {
-            sumOfCardValues += 10;
+            sumOfCardValues += VALUE_OF_JQK;
         }
         if (!number.isJQK()) {
             sumOfCardValues += Integer.parseInt(number.value());
