@@ -10,9 +10,9 @@ public class Card {
         return new Card(numberIndex, shapeIndex);
     }
 
-    private Card(final int number, final int shapeIndex) {
+    private Card(final int numberIndex, final int shapeIndex) {
         this.shape = TrumpShape.indexOf(shapeIndex);
-        this.number = TrumpNumber.indexOf(number);
+        this.number = TrumpNumber.indexOf(numberIndex);
     }
 
     public TrumpNumber getNumber() {
