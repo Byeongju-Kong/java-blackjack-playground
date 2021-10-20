@@ -54,11 +54,15 @@ public class Cards {
     }
 
     private void addA() {
-        if (sumOfCardValues >= 11) {
+        if (isSumHigherThan21IfAIsCalculatedAs11()) {
             sumOfCardValues += 1;
         }
-        if (sumOfCardValues < 11) {
+        if (!isSumHigherThan21IfAIsCalculatedAs11()) {
             sumOfCardValues += 11;
         }
+    }
+
+    private boolean isSumHigherThan21IfAIsCalculatedAs11() {
+        return sumOfCardValues >= 11;
     }
 }
