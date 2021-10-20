@@ -2,14 +2,12 @@ package model;
 
 import model.vo.Card;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class CardProvider {
     private static final int KIND_OF_NUMBER = 12;
     private static final int KIND_OF_SHAPE = 4;
-    private final Set<Card> providedCars = new HashSet<>();
+    private final List<Card> providedCars = new ArrayList<>();
     private final Random random = new Random();
 
     protected CardProvider() {
