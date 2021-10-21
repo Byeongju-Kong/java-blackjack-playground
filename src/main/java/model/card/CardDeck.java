@@ -2,7 +2,9 @@ package model.card;
 
 import model.card.vo.Card;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class CardDeck {
     private static final int KIND_OF_NUMBER = 12;
