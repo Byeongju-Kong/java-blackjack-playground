@@ -1,6 +1,6 @@
-package model;
+package model.card;
 
-import model.card.Cards;
+import model.BlackJackStatus;
 import model.card.vo.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,5 @@
-package model;
+package model.card;
 
-import model.card.CardDeck;
 import model.card.vo.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class CardProviderTest {
+class CardDeckTest {
     private CardDeck cardProvider;
     private final Set<Card> providedCars = new HashSet<>();
     private final int[] indices = new int[]{1, 1, 2, 2, 3, 3};
