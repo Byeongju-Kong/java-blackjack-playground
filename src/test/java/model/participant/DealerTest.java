@@ -57,7 +57,7 @@ class DealerTest {
     @DisplayName("플레이어의 카드가 블랙잭인지 반환한다.")
     @MethodSource("provideCardsAndHasBlackJackCards")
     void hasBlackJackCards(List<Card> initialCards, boolean expected) {
-        Dealer dealer = Dealer.participate(initialCards);
+        Participant dealer = Dealer.participate(initialCards);
         boolean actual = dealer.hasBlackJackCard();
         assertThat(actual).isEqualTo(expected);
     }

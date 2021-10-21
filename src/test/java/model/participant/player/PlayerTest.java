@@ -32,7 +32,7 @@ class PlayerTest {
     @MethodSource("provideCardsAndIsDefeater")
     void isDefeater(Card newCard, boolean expected) {
         Player player = Player.participate("Brandon", initialCards);
-        player.drawNewCard(newCard);
+        player.draw(newCard);
         boolean actual = player.isDefeater();
         assertThat(actual).isEqualTo(expected);
     }

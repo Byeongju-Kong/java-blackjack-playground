@@ -1,13 +1,11 @@
 package model.participant.player;
 
-import model.BlackJackStatus;
-import model.card.Cards;
 import model.card.vo.Card;
+import model.participant.Participant;
 
 import java.util.List;
 
-public class Player {
-    private final Cards cards;
+public class Player extends Participant {
     private final Name name;
 
     public static Player participate(final String name, final List<Card> initialCards) {
@@ -15,23 +13,11 @@ public class Player {
     }
 
     private Player(final String name, final List<Card> initialCards) {
+        super(initialCards);
         this.name = Name.create(name);
-        this.cards = Cards.generate(initialCards);
     }
 
     public Name getName() {
         return name;
-    }
-
-    public void drawNewCard(Card newCard) {
-        cards.draw(newCard);
-    }
-
-    public boolean isDefeater() {
-        return cards.getStatus() == BlackJackStatus.HIGHER_THAN_21;
-    }
-
-    public boolean hasBlackJackCard() {
-        return cards.getStatus() == BlackJackStatus.BLACKJACK;
     }
 }
