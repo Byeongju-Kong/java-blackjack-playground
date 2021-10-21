@@ -1,7 +1,8 @@
-package model;
+package model.card;
 
-import model.vo.Card;
-import model.vo.TrumpNumber;
+import model.BlackJackStatus;
+import model.card.vo.Card;
+import model.card.vo.TrumpNumber;
 
 import java.util.List;
 

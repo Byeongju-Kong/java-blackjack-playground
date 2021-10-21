@@ -1,6 +1,6 @@
-package model;
+package model.card;
 
-import model.vo.Card;
+import model.card.vo.Card;
 
 import java.util.*;
 

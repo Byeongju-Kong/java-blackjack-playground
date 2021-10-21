@@ -1,4 +1,4 @@
-package model.vo;
+package model.card.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

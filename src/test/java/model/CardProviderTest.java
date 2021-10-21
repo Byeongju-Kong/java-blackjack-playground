@@ -1,6 +1,7 @@
 package model;
 
-import model.vo.Card;
+import model.card.CardDeck;
+import model.card.vo.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
