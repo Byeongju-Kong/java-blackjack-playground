@@ -37,6 +37,12 @@ public class Cards {
         return BLACKJACK;
     }
 
+    public boolean isHigherThan16() {
+        sumOfCardValues = 0;
+        addNumberValue();
+        return sumOfCardValues > 16;
+    }
+
     private void addNumberValue() {
         values.stream()
                 .filter(card -> !card.getNumber().isA())

@@ -44,6 +44,24 @@ class CardsTest {
         );
     }
 
+    @ParameterizedTest
+    @DisplayName("카드의 합이 16보다 큰 지 반환한다.")
+    @MethodSource("provideCardsAndHigherThan16")
+    void isHigherThan16(List<Card> initialCards, boolean expected) {
+        Cards cards = Cards.generate(initialCards);
+        boolean actual = cards.isHigherThan16();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideCardsAndHigherThan16() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(Card.generate(8, 1), Card.generate(9, 1)),
+                        true),
+                Arguments.of(Arrays.asList(Card.generate(7, 1), Card.generate(9, 1)),
+                        false)
+        );
+    }
+
     @Test
     @DisplayName("새 카드를 뽑는다.")
     void draw() {
