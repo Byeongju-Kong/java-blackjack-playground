@@ -1,6 +1,7 @@
 package model.participant.player;
 
 import model.card.vo.Card;
+import model.participant.player.vo.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

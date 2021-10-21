@@ -1,4 +1,4 @@
-package model.participant.player;
+package model.participant.player.vo;
 
 import java.util.Objects;
 

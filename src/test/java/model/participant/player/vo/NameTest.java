@@ -1,4 +1,4 @@
-package model.participant.player;
+package model.participant.player.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

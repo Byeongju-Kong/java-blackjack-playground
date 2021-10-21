@@ -2,6 +2,7 @@ package model.participant.player;
 
 import model.card.vo.Card;
 import model.participant.Participant;
+import model.participant.player.vo.Name;
 
 import java.util.List;
 
