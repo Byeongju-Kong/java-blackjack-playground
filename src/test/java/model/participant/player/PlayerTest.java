@@ -43,4 +43,22 @@ class PlayerTest {
                 Arguments.of(Card.generate(4, 1), false)
         );
     }
+
+    @ParameterizedTest
+    @DisplayName("플레이어의 카드가 블랙잭인지 반환한다.")
+    @MethodSource("provideCardsAndHasBlackJackCards")
+    void hasBlackJackCards(List<Card> initialCards, boolean expected) {
+        Player player = Player.participate("Brandon", initialCards);
+        boolean actual = player.hasBlackJackCard();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideCardsAndHasBlackJackCards() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(Card.generate(10, 1), Card.generate(11, 1)),
+                        false),
+                Arguments.of(Arrays.asList(Card.generate(1, 1), Card.generate(10, 1)),
+                        true)
+        );
+    }
 }
