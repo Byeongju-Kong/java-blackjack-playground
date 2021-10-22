@@ -12,7 +12,7 @@ public class Player extends Participant {
     }
 
     private Player(final String name, final List<Card> initialCards) {
-        super(Name.create(name), initialCards);
+        super(name, initialCards);
     }
 
     public Name getName() {

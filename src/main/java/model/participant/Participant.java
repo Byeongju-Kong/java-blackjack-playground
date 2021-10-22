@@ -12,9 +12,9 @@ public class Participant {
     protected Name name;
     Cards cards;
 
-    public Participant(final Name name, final List<Card> initialCards) {
+    public Participant(final String name, final List<Card> initialCards) {
         this.cards = Cards.generate(initialCards);
-        this.name = name;
+        this.name = Name.create(name);
     }
 
     public void draw(final Card newCards) {
