@@ -22,7 +22,7 @@ class ParticipantTest {
     void isDefeater(Card newCard, boolean expected) {
         List<Card> initialCards =
                 new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1)));
-        Participant participant = new Participant(initialCards, Name.create("Brandon"));
+        Participant participant = new Participant(Name.create("Brandon"), initialCards);
         participant.draw(newCard);
         boolean actual = participant.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
@@ -39,7 +39,7 @@ class ParticipantTest {
     @DisplayName("참가자의 카드가 블랙잭인지 반환한다.")
     @MethodSource("provideCardsAndHasBlackJackCards")
     void hasBlackJackCards(List<Card> initialCards, boolean expected) {
-        Participant participant = new Participant(initialCards, Name.create("Brandon"));
+        Participant participant = new Participant(Name.create("Brandon"), initialCards);
         boolean actual = participant.hasBlackJackCard();
         assertThat(actual).isEqualTo(expected);
     }
@@ -58,8 +58,8 @@ class ParticipantTest {
     void equals() {
         List<Card> firstAnyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
         List<Card> secondAnyCards = Arrays.asList(Card.generate(8, 1), Card.generate(7, 1));
-        Participant first = new Participant(firstAnyCards, Name.create("Brandon"));
-        Participant second = new Participant(secondAnyCards, Name.create("Brandon"));
+        Participant first = new Participant(Name.create("Brandon"), firstAnyCards);
+        Participant second = new Participant(Name.create("Brandon"), secondAnyCards);
         boolean actual = first.equals(second);
         assertThat(actual).isTrue();
     }

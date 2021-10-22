@@ -11,7 +11,7 @@ public class Dealer extends Participant {
     }
 
     private Dealer(List<Card> initialCards) {
-        super(initialCards, Name.create("Dealer"));
+        super(Name.create("Dealer"), initialCards);
     }
 
     public boolean hasCardsHigherThan16() {

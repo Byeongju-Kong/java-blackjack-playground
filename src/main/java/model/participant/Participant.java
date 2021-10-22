@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Participant {
-    Cards cards;
     protected Name name;
+    Cards cards;
 
-    public Participant(final List<Card> initialCards, final Name name) {
+    public Participant(final Name name, final List<Card> initialCards) {
         this.cards = Cards.generate(initialCards);
         this.name = name;
     }
