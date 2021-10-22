@@ -6,7 +6,6 @@ import model.card.vo.Card;
 import model.participant.player.vo.Name;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Participant {
     protected Name name;
@@ -15,6 +14,10 @@ public class Participant {
     public Participant(final String name, final List<Card> initialCards) {
         this.cards = Cards.generate(initialCards);
         this.name = Name.create(name);
+    }
+
+    public boolean hasName(final Name name) {
+        return this.name.equals(name);
     }
 
     public void draw(final Card newCards) {
@@ -27,18 +30,5 @@ public class Participant {
 
     public boolean hasBlackJackCard() {
         return cards.getStatus() == BlackJackStatus.BLACKJACK;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Participant that = (Participant) o;
-        return Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
     }
 }

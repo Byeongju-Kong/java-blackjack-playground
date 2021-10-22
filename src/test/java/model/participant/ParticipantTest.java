@@ -1,6 +1,7 @@
 package model.participant;
 
 import model.card.vo.Card;
+import model.participant.player.vo.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,13 +54,10 @@ class ParticipantTest {
     }
 
     @Test
-    @DisplayName("Name 필드를 기준으로 같은 객체인지를 반환한다.")
-    void equals() {
-        List<Card> firstAnyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
-        List<Card> secondAnyCards = Arrays.asList(Card.generate(8, 1), Card.generate(7, 1));
-        Participant first = new Participant("Brandon", firstAnyCards);
-        Participant second = new Participant("Brandon", secondAnyCards);
-        boolean actual = first.equals(second);
-        assertThat(actual).isTrue();
+    @DisplayName("Name 객체를 받아 자신의 이름과 같은지 반환한다.")
+    void hasName() {
+        List<Card> anyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
+        Participant participant = new Participant("Brandon", anyCards);
+        assertThat(participant.hasName(Name.create("Brandon"))).isTrue();
     }
 }
