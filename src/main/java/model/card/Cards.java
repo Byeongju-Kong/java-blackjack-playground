@@ -21,7 +21,7 @@ public class Cards {
         values = initialCards;
     }
 
-    public void draw(Card newCard) {
+    public void add(Card newCard) {
         values.add(newCard);
     }
 

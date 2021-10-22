@@ -14,7 +14,7 @@ public class Participant {
     }
 
     public void draw(final Card newCards) {
-        cards.draw(newCards);
+        cards.add(newCards);
     }
 
     public boolean isDefeater() {

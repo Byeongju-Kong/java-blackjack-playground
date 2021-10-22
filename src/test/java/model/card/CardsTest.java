@@ -69,7 +69,7 @@ class CardsTest {
                 new ArrayList<>(Arrays.asList(Card.generate(1, 1), Card.generate(2, 1)));
         Cards cards =  Cards.generate(initialCards);
         Card eight = Card.generate(8, 1);
-        cards.draw(eight);
+        cards.add(eight);
         BlackJackStatus actual = cards.getStatus();
         BlackJackStatus expected = BlackJackStatus.BLACKJACK;
         assertThat(actual).isEqualTo(expected);
