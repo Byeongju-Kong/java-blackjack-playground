@@ -3,14 +3,17 @@ package model.participant;
 import model.BlackJackStatus;
 import model.card.Cards;
 import model.card.vo.Card;
+import model.participant.player.vo.Name;
 
 import java.util.List;
 
 public class Participant {
     Cards cards;
+    protected Name name;
 
-    public Participant(final List<Card> initialCards) {
+    public Participant(final List<Card> initialCards, final Name name) {
         this.cards = Cards.generate(initialCards);
+        this.name = name;
     }
 
     public void draw(final Card newCards) {

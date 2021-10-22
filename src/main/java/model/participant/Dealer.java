@@ -1,6 +1,7 @@
 package model.participant;
 
 import model.card.vo.Card;
+import model.participant.player.vo.Name;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Dealer extends Participant {
     }
 
     private Dealer(List<Card> initialCards) {
-        super(initialCards);
+        super(initialCards, Name.create("Dealer"));
     }
 
     public boolean hasCardsHigherThan16() {

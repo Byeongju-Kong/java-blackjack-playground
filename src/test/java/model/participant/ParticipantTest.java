@@ -1,6 +1,7 @@
 package model.participant;
 
 import model.card.vo.Card;
+import model.participant.player.vo.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +21,7 @@ class ParticipantTest {
     void isDefeater(Card newCard, boolean expected) {
         List<Card> initialCards =
                 new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1)));
-        Participant participant = new Participant(initialCards);
+        Participant participant = new Participant(initialCards, Name.create("Brandon"));
         participant.draw(newCard);
         boolean actual = participant.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
@@ -37,7 +38,7 @@ class ParticipantTest {
     @DisplayName("참가자의 카드가 블랙잭인지 반환한다.")
     @MethodSource("provideCardsAndHasBlackJackCards")
     void hasBlackJackCards(List<Card> initialCards, boolean expected) {
-        Participant participant = new Participant(initialCards);
+        Participant participant = new Participant(initialCards, Name.create("Brandon"));
         boolean actual = participant.hasBlackJackCard();
         assertThat(actual).isEqualTo(expected);
     }

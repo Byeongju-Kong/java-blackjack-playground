@@ -7,15 +7,12 @@ import model.participant.player.vo.Name;
 import java.util.List;
 
 public class Player extends Participant {
-    private final Name name;
-
     public static Player participate(final String name, final List<Card> initialCards) {
         return new Player(name, initialCards);
     }
 
     private Player(final String name, final List<Card> initialCards) {
-        super(initialCards);
-        this.name = Name.create(name);
+        super(initialCards, Name.create(name));
     }
 
     public Name getName() {
