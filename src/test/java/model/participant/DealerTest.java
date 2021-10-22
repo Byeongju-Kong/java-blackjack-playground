@@ -42,7 +42,7 @@ class DealerTest {
                 new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1)));
         Dealer dealer = Dealer.participate(initialCards);
         dealer.draw(newCard);
-        boolean actual = dealer.isDefeater();
+        boolean actual = dealer.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
     }
 

@@ -17,7 +17,7 @@ public class Participant {
         cards.add(newCards);
     }
 
-    public boolean isDefeater() {
+    public boolean doesOccurBust() {
         return cards.getStatus() == BlackJackStatus.BUST;
     }
 

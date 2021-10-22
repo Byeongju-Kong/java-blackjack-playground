@@ -34,7 +34,7 @@ class PlayerTest {
     void isDefeater(Card newCard, boolean expected) {
         Player player = Player.participate("Brandon", initialCards);
         player.draw(newCard);
-        boolean actual = player.isDefeater();
+        boolean actual = player.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
     }
 

@@ -22,7 +22,7 @@ class ParticipantTest {
                 new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1)));
         Participant participant = new Participant(initialCards);
         participant.draw(newCard);
-        boolean actual = participant.isDefeater();
+        boolean actual = participant.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
     }
 
