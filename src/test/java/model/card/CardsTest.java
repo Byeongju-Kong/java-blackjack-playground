@@ -14,8 +14,33 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class CardsTest {
+    private final List<Card> initialCards =
+            new ArrayList<>(Arrays.asList(Card.generate(1, 1), Card.generate(2, 1)));
+    @Test
+    @DisplayName("카드들을 반환한다.")
+    void getCars() {
+        Cards cards = Cards.generate(initialCards);
+        List<Card> cardList = cards.getCards();
+        assertAll(
+                () -> assertThat(cardList.get(0)).isEqualTo(Card.generate(1, 1)),
+                () -> assertThat(cardList.get(1)).isEqualTo(Card.generate(2, 1))
+        );
+    }
+
+    @Test
+    @DisplayName("새 카드를 뽑는다.")
+    void draw() {
+        Cards cards =  Cards.generate(initialCards);
+        Card eight = Card.generate(8, 1);
+        cards.add(eight);
+        BlackJackStatus actual = cards.getStatus();
+        BlackJackStatus expected = BlackJackStatus.BLACKJACK;
+        assertThat(actual).isEqualTo(expected);
+    }
+
     @ParameterizedTest
     @DisplayName("카드의 합이 21을 초과하는지 반환한다.")
     @MethodSource("provideBlackJackStatus")
@@ -60,18 +85,5 @@ class CardsTest {
                 Arguments.of(Arrays.asList(Card.generate(7, 1), Card.generate(9, 1)),
                         false)
         );
-    }
-
-    @Test
-    @DisplayName("새 카드를 뽑는다.")
-    void draw() {
-        List<Card> initialCards =
-                new ArrayList<>(Arrays.asList(Card.generate(1, 1), Card.generate(2, 1)));
-        Cards cards =  Cards.generate(initialCards);
-        Card eight = Card.generate(8, 1);
-        cards.add(eight);
-        BlackJackStatus actual = cards.getStatus();
-        BlackJackStatus expected = BlackJackStatus.BLACKJACK;
-        assertThat(actual).isEqualTo(expected);
     }
 }

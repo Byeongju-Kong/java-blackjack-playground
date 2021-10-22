@@ -21,6 +21,10 @@ public class Cards {
         values = initialCards;
     }
 
+    public List<Card> getCards() {
+        return values;
+    }
+
     public void add(Card newCard) {
         values.add(newCard);
     }
