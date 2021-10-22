@@ -3,6 +3,7 @@ package model.participant;
 import model.card.vo.Card;
 import model.participant.player.vo.Name;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -50,5 +51,16 @@ class ParticipantTest {
                 Arguments.of(Arrays.asList(Card.generate(1, 1), Card.generate(10, 1)),
                         true)
         );
+    }
+
+    @Test
+    @DisplayName("Name 필드를 기준으로 같은 객체인지를 반환한다.")
+    void equals() {
+        List<Card> firstAnyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
+        List<Card> secondAnyCards = Arrays.asList(Card.generate(8, 1), Card.generate(7, 1));
+        Participant first = new Participant(firstAnyCards, Name.create("Brandon"));
+        Participant second = new Participant(secondAnyCards, Name.create("Brandon"));
+        boolean actual = first.equals(second);
+        assertThat(actual).isTrue();
     }
 }
