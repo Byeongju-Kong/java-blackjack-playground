@@ -40,7 +40,7 @@ class CardsTest {
                 Arguments.of(
                         Arrays.asList(Card.generate(11, 1), Card.generate(12, 1),
                                 Card.generate(4, 3)),
-                        BlackJackStatus.HIGHER_THAN_21)
+                        BlackJackStatus.BUST)
         );
     }
 

@@ -18,7 +18,7 @@ public class Participant {
     }
 
     public boolean isDefeater() {
-        return cards.getStatus() == BlackJackStatus.HIGHER_THAN_21;
+        return cards.getStatus() == BlackJackStatus.BUST;
     }
 
     public boolean hasBlackJackCard() {

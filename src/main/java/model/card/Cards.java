@@ -32,7 +32,7 @@ public class Cards {
             return LOWER_THAN_21;
         }
         if (sumOfCardValues > 21) {
-            return HIGHER_THAN_21;
+            return BUST;
         }
         return BLACKJACK;
     }
