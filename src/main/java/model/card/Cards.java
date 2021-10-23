@@ -61,7 +61,7 @@ public class Cards {
             sumOfCardValues += VALUE_OF_JQK;
         }
         if (!number.isJQK()) {
-            sumOfCardValues += Integer.parseInt(number.value());
+            sumOfCardValues += number.value();
         }
     }
 

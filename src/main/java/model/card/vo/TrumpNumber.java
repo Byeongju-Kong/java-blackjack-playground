@@ -3,13 +3,13 @@ package model.card.vo;
 import java.util.Arrays;
 
 public enum TrumpNumber {
-    A(1, "A"), TWO(2, "2"), THREE(3, "3"), FOUR(4, "4"), FIVE(5, "5"),
-    SIX(6, "6"), SEVEN(7, "7"), EIGHT(8, "8"), NINE(9, "9"),
-    J(10, "J"), Q(11, "Q"), K(12, "K");
+    A(1, 1), TWO(2, 2), THREE(3, 3), FOUR(4, 4), FIVE(5, 5),
+    SIX(6, 6), SEVEN(7, 7), EIGHT(8, 8), NINE(9, 9),
+    J(10, 10), Q(11, 10), K(12, 10);
     private final int numberIndex;
-    private final String value;
+    private final int value;
 
-    TrumpNumber(final int numberIndex, final String value) {
+    TrumpNumber(final int numberIndex, final int value) {
         this.numberIndex = numberIndex;
         this.value = value;
     }
@@ -29,7 +29,7 @@ public enum TrumpNumber {
         return this == J || this == Q || this == K;
     }
 
-    public String value() {
+    public int value() {
         return value;
     }
 }

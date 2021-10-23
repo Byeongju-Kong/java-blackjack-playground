@@ -16,9 +16,9 @@ class TrumpNumberTest {
     @ParameterizedTest
     @DisplayName("Index를 값으로 Index에 해당하는 객체를 반환받는다.")
     @MethodSource("provideIndexAndTrumpNumber")
-    void findBy(int index, TrumpNumber expectedTrumpNumber, String expectedValue) {
+    void findBy(int index, TrumpNumber expectedTrumpNumber, int expectedValue) {
         TrumpNumber actualTrumpNumber = TrumpNumber.indexOf(index);
-        String actualValue = actualTrumpNumber.value();
+        int actualValue = actualTrumpNumber.value();
         assertAll(
                 () -> assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber),
                 () -> assertThat(actualValue).isEqualTo(expectedValue)
@@ -27,18 +27,18 @@ class TrumpNumberTest {
 
     private static Stream<Arguments> provideIndexAndTrumpNumber() {
         return Stream.of(
-                Arguments.of(1, TrumpNumber.A, "A"),
-                Arguments.of(2, TrumpNumber.TWO, "2"),
-                Arguments.of(3, TrumpNumber.THREE, "3"),
-                Arguments.of(4, TrumpNumber.FOUR, "4"),
-                Arguments.of(5, TrumpNumber.FIVE, "5"),
-                Arguments.of(6, TrumpNumber.SIX, "6"),
-                Arguments.of(7, TrumpNumber.SEVEN, "7"),
-                Arguments.of(8, TrumpNumber.EIGHT, "8"),
-                Arguments.of(9, TrumpNumber.NINE, "9"),
-                Arguments.of(10, TrumpNumber.J, "J"),
-                Arguments.of(11, TrumpNumber.Q, "Q"),
-                Arguments.of(12, TrumpNumber.K, "K")
+                Arguments.of(1, TrumpNumber.A, 1),
+                Arguments.of(2, TrumpNumber.TWO,2),
+                Arguments.of(3, TrumpNumber.THREE, 3),
+                Arguments.of(4, TrumpNumber.FOUR, 4),
+                Arguments.of(5, TrumpNumber.FIVE, 5),
+                Arguments.of(6, TrumpNumber.SIX, 6),
+                Arguments.of(7, TrumpNumber.SEVEN, 7),
+                Arguments.of(8, TrumpNumber.EIGHT, 8),
+                Arguments.of(9, TrumpNumber.NINE, 9),
+                Arguments.of(10, TrumpNumber.J, 10),
+                Arguments.of(11, TrumpNumber.Q, 10),
+                Arguments.of(12, TrumpNumber.K, 10)
         );
     }
 
