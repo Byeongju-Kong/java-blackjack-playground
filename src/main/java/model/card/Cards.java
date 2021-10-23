@@ -19,6 +19,8 @@ public class Cards {
 
     private Cards(List<Card> initialCards) {
         values = initialCards;
+        sumOfCardValues = 0;
+        addNumberValue();
     }
 
     public List<Card> getCards() {
@@ -27,11 +29,11 @@ public class Cards {
 
     public void add(Card newCard) {
         values.add(newCard);
+        sumOfCardValues = 0;
+        addNumberValue();
     }
 
     public BlackJackStatus getStatus() {
-        sumOfCardValues = 0;
-        addNumberValue();
         if (sumOfCardValues < 21) {
             return LOWER_THAN_21;
         }
@@ -42,8 +44,6 @@ public class Cards {
     }
 
     public boolean isHigherThan16() {
-        sumOfCardValues = 0;
-        addNumberValue();
         return sumOfCardValues > 16;
     }
 
