@@ -86,4 +86,15 @@ class CardsTest {
                         false)
         );
     }
+
+    @Test
+    @DisplayName("Cards 객체를 받아 자신의 카드합 보다 작은지 반환한다.")
+    void hasHigherSumOfCardValuesThan() {
+        Cards firstCards =
+                Cards.generate(Arrays.asList(Card.generate(1, 1), Card.generate(8, 1)));
+        Cards secondCards =
+                Cards.generate(Arrays.asList(Card.generate(2, 1), Card.generate(8, 1)));
+        boolean actual = firstCards.hasHigherSumOfCardValuesThan(secondCards);
+        assertThat(actual).isTrue();
+    }
 }

@@ -77,4 +77,8 @@ public class Cards {
     private boolean isSumHigherThan21IfAIsCalculatedAs11() {
         return sumOfCardValues >= 11;
     }
+
+    public boolean hasHigherSumOfCardValuesThan(final Cards cards) {
+        return this.sumOfCardValues >= cards.sumOfCardValues;
+    }
 }
