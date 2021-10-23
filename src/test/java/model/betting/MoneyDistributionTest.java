@@ -28,7 +28,7 @@ class MoneyDistributionTest {
     @Test
     @DisplayName("게임 결과에 대한 금액을 반환한다.")
     void getDistributedMoneyOfGameThatWinnerIs() {
-        MoneyDistribution moneyDistribution = new MoneyDistribution(moneysOfParticipants);
+        MoneyDistribution moneyDistribution = MoneyDistribution.create(moneysOfParticipants);
         Map<Name, Integer> actual = moneyDistribution.getDistributedMoneyOfGameThatWinnerIs(brandon);
         assertAll(
                 () -> assertThat(actual).containsEntry(brandon, 30000),

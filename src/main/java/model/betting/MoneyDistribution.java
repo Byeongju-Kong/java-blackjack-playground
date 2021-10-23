@@ -10,7 +10,11 @@ public class MoneyDistribution {
     private final Map<Name, Integer> finalMoney;
     private final int sumOfParticipantsMoney;
 
-    public MoneyDistribution(final Map<Name, BettingMoney> moneysOfParticipants) {
+    public static MoneyDistribution create(final Map<Name, BettingMoney> moneysOfParticipants) {
+        return new MoneyDistribution(moneysOfParticipants);
+    }
+
+    private MoneyDistribution(final Map<Name, BettingMoney> moneysOfParticipants) {
         this.moneysOfParticipants = moneysOfParticipants;
         finalMoney = new HashMap<>();
         sumOfParticipantsMoney = moneysOfParticipants.values().stream()
