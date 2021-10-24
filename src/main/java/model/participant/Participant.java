@@ -16,12 +16,16 @@ public class Participant {
         this.name = Name.create(name);
     }
 
-    public boolean hasName(final Name name) {
-        return this.name.equals(name);
-    }
-
     public void draw(final Card newCards) {
         cards.add(newCards);
+    }
+
+    public Cards getCards() {
+        return cards;
+    }
+
+    public Name getName() {
+        return name;
     }
 
     public boolean doesOccurBust() {

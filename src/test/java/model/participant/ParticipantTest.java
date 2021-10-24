@@ -1,5 +1,6 @@
 package model.participant;
 
+import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.player.vo.Name;
 import org.junit.jupiter.api.DisplayName;
@@ -44,6 +45,17 @@ class ParticipantTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("카드들을 반환한다.")
+    void getCards() {
+        List<Card> initialCards = Arrays.asList(
+                Card.generate(6, 1), Card.generate(11, 1),
+                Card.generate(1, 1));
+        Participant participant = new Participant("Brandon", initialCards);
+        Cards cards = participant.getCards();
+        assertThat(cards.getCards()).isEqualTo(initialCards);
+    }
+
     private static Stream<Arguments> provideCardsAndHasBlackJackCards() {
         return Stream.of(
                 Arguments.of(Arrays.asList(Card.generate(10, 1), Card.generate(11, 1)),
@@ -54,10 +66,12 @@ class ParticipantTest {
     }
 
     @Test
-    @DisplayName("Name 객체를 받아 자신의 이름과 같은지 반환한다.")
+    @DisplayName("이름을 반환한다.")
     void hasName() {
         List<Card> anyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
         Participant participant = new Participant("Brandon", anyCards);
-        assertThat(participant.hasName(Name.create("Brandon"))).isTrue();
+        Name actual = participant.getName();
+        Name expected = Name.create("Brandon");
+        assertThat(actual).isEqualTo(expected);
     }
 }
