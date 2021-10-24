@@ -3,28 +3,35 @@ package model.card;
 import model.card.vo.Card;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class CardDeck {
     private static final int KIND_OF_NUMBER = 12;
     private static final int KIND_OF_SHAPE = 4;
-    private final List<Card> providedCars = new ArrayList<>();
-    private final Random random = new Random();
+    private final List<Card> providedCards;
+    private final Random random;
 
-    protected CardDeck() {
+    CardDeck() {
+        providedCards = new ArrayList<>();
+        random = new Random();
     }
 
     public static CardDeck shuffle() {
         return new CardDeck();
     }
 
-    public Card provide() {
+    public List<Card> provideInitialCards() {
+        return new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard()));
+    }
+
+    public Card provideNewCard() {
         Card newCard;
         do {
             newCard = Card.generate(generateRandomIndex(KIND_OF_NUMBER), generateRandomIndex(KIND_OF_SHAPE));
         } while (isProvidedAlready(newCard));
-        providedCars.add(newCard);
+        providedCards.add(newCard);
         return newCard;
     }
 
@@ -33,6 +40,6 @@ public class CardDeck {
     }
 
     protected boolean isProvidedAlready(final Card newCard) {
-        return providedCars.contains(newCard);
+        return providedCards.contains(newCard);
     }
 }
