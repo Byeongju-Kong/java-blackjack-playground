@@ -1,6 +1,6 @@
 package model.betting;
 
-import model.participant.player.vo.Name;
+import model.participant.vo.Name;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

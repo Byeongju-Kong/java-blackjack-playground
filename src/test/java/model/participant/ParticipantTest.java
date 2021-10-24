@@ -2,7 +2,7 @@ package model.participant;
 
 import model.card.Cards;
 import model.card.vo.Card;
-import model.participant.player.vo.Name;
+import model.participant.vo.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +23,7 @@ class ParticipantTest {
     void isDefeater(Card newCard, boolean expected) {
         List<Card> initialCards =
                 new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1)));
-        Participant participant = new Participant("Brandon", initialCards);
+        Participant participant = Participant.participate("Brandon", initialCards);
         participant.draw(newCard);
         boolean actual = participant.doesOccurBust();
         assertThat(actual).isEqualTo(expected);
@@ -40,7 +40,7 @@ class ParticipantTest {
     @DisplayName("참가자의 카드가 블랙잭인지 반환한다.")
     @MethodSource("provideCardsAndHasBlackJackCards")
     void hasBlackJackCards(List<Card> initialCards, boolean expected) {
-        Participant participant = new Participant("Brandon", initialCards);
+        Participant participant = Participant.participate("Brandon", initialCards);
         boolean actual = participant.hasBlackJackCard();
         assertThat(actual).isEqualTo(expected);
     }
@@ -51,7 +51,7 @@ class ParticipantTest {
         List<Card> initialCards = Arrays.asList(
                 Card.generate(6, 1), Card.generate(11, 1),
                 Card.generate(1, 1));
-        Participant participant = new Participant("Brandon", initialCards);
+        Participant participant = Participant.participate("Brandon", initialCards);
         Cards cards = participant.getCards();
         assertThat(cards.getCards()).isEqualTo(initialCards);
     }
@@ -69,7 +69,7 @@ class ParticipantTest {
     @DisplayName("이름을 반환한다.")
     void hasName() {
         List<Card> anyCards = Arrays.asList(Card.generate(10, 1), Card.generate(11, 1));
-        Participant participant = new Participant("Brandon", anyCards);
+        Participant participant = Participant.participate("Brandon", anyCards);
         Name actual = participant.getName();
         Name expected = Name.create("Brandon");
         assertThat(actual).isEqualTo(expected);

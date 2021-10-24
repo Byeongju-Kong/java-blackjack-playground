@@ -1,6 +1,6 @@
 package model.betting;
 
-import model.participant.player.vo.Name;
+import model.participant.vo.Name;
 
 import java.util.HashMap;
 import java.util.Map;
