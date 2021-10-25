@@ -74,4 +74,32 @@ class ParticipantTest {
         Name expected = Name.create("Brandon");
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("Participant 객체를 받아 자신의 카드 합이 더 큰지 반환한다.")
+    void hasHigherCardsThan() {
+        List<Card> firstCards = Arrays.asList(Card.generate(1, 1), Card.generate(10, 1));
+        List<Card> secondCards = Arrays.asList(Card.generate(3, 1), Card.generate(10, 1));
+        Participant first = Participant.participate("Brandon", firstCards);
+        Participant second = Participant.participate("Henry", secondCards);
+        assertThat(first.hasHigherCardsThan(second)).isTrue();
+    }
+
+    @Test
+    @DisplayName("가지고 있는 카드가 16 이하 인지 반환한다.")
+    void hasCardsLowerThan16() {
+        List<Card> lowerCardsThan16 = Arrays.asList(Card.generate(3, 1), Card.generate(10, 1));
+        Participant participant = Participant.participate("Brandon", lowerCardsThan16);
+        assertThat(participant.hasCardsLowerThan16()).isTrue();
+    }
+
+    @Test
+    @DisplayName("이름을 기준으로 같은 참가자인지 반환한다.")
+    void equals() {
+        List<Card> firstCards = Arrays.asList(Card.generate(1, 1), Card.generate(10, 1));
+        List<Card> secondCards = Arrays.asList(Card.generate(3, 1), Card.generate(10, 1));
+        Participant first = Participant.participate("Brandon", firstCards);
+        Participant second = Participant.participate("Brandon", secondCards);
+        assertThat(first.equals(second)).isTrue();
+    }
 }
