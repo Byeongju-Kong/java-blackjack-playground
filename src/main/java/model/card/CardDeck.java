@@ -10,6 +10,7 @@ import java.util.Random;
 public class CardDeck {
     private static final int KIND_OF_NUMBER = 12;
     private static final int KIND_OF_SHAPE = 4;
+    private static final int DEFAULT_ADD_OF_INDEX = 1;
     private final List<Card> providedCards;
     private final Random random;
 
@@ -36,7 +37,7 @@ public class CardDeck {
     }
 
     protected int generateRandomIndex(final int boundary) {
-        return random.nextInt(boundary);
+        return random.nextInt(boundary) + DEFAULT_ADD_OF_INDEX;
     }
 
     protected boolean isProvidedAlready(final Card newCard) {
