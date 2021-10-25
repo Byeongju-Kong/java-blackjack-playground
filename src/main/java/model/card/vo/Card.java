@@ -1,7 +1,5 @@
 package model.card.vo;
 
-import java.util.Objects;
-
 public class Card {
     private final TrumpNumber number;
     private final TrumpShape shape;
@@ -34,10 +32,5 @@ public class Card {
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
         return number == card.number && shape == card.shape;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number, shape);
     }
 }
