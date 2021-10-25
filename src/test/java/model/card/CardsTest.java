@@ -74,16 +74,16 @@ class CardsTest {
     @MethodSource("provideCardsAndHigherThan16")
     void isHigherThan16(List<Card> initialCards, boolean expected) {
         Cards cards = Cards.generate(initialCards);
-        boolean actual = cards.isHigherThan16();
+        boolean actual = cards.isLowerThan16();
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideCardsAndHigherThan16() {
         return Stream.of(
                 Arguments.of(Arrays.asList(Card.generate(8, 1), Card.generate(9, 1)),
-                        true),
+                        false),
                 Arguments.of(Arrays.asList(Card.generate(7, 1), Card.generate(9, 1)),
-                        false)
+                        true)
         );
     }
 

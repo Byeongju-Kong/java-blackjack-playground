@@ -33,12 +33,12 @@ public class Participant {
         return name;
     }
 
-    public boolean hasHigherCards(final Participant another) {
+    public boolean hasHigherCardsThan(final Participant another) {
         return cards.hasHigherSumOfCardValuesThan(another.cards);
     }
 
-    public boolean hasCardsHigherThan16() {
-        return cards.isHigherThan16();
+    public boolean hasCardsLowerThan16() {
+        return cards.isLowerThan16();
     }
 
     public boolean doesOccurBust() {

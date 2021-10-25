@@ -39,8 +39,8 @@ public class Cards {
         return LOWER_THAN_21;
     }
 
-    public boolean isHigherThan16() {
-        return sumOfCardValues.value() > 16;
+    public boolean isLowerThan16() {
+        return sumOfCardValues.value() <= 16;
     }
 
     public boolean hasHigherSumOfCardValuesThan(final Cards cards) {
