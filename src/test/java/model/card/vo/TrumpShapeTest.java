@@ -1,4 +1,4 @@
-package model.vo;
+package model.card.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,8 +15,8 @@ class TrumpShapeTest {
     @DisplayName("Index 값으로 Index에 해당하는 객체를 반환받는다.")
     @MethodSource("ProvideIndexAndTrumpShape")
     void findBy(int index, TrumpShape expectedShape, String expectedValue) {
-        TrumpShape actualShape = TrumpShape.findBy(index);
-        String actualValue = expectedShape.toString();
+        TrumpShape actualShape = TrumpShape.indexOf(index);
+        String actualValue = expectedShape.value();
         assertAll(
                 () -> assertThat(actualShape).isEqualTo(expectedShape),
                 () -> assertThat(actualValue).isEqualTo(expectedValue)

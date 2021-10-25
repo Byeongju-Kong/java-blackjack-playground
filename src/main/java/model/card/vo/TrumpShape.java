@@ -1,4 +1,4 @@
-package model.vo;
+package model.card.vo;
 
 import java.util.Arrays;
 
@@ -12,15 +12,14 @@ public enum TrumpShape {
         this.value = value;
     }
 
-    public static TrumpShape findBy(final int shapeIndex) {
+    public static TrumpShape indexOf(final int shapeIndex) {
         return Arrays.stream(TrumpShape.values())
                 .filter(trumpShape -> trumpShape.shapeIndex == shapeIndex)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Index에 대응하는 모양이 없습니다."));
     }
 
-    @Override
-    public String toString() {
+    public String value() {
         return value;
     }
 }

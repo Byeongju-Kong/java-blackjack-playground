@@ -1,6 +1,4 @@
-package model.vo;
-
-import java.util.Objects;
+package model.card.vo;
 
 public class Card {
     private final TrumpNumber number;
@@ -10,18 +8,22 @@ public class Card {
         return new Card(numberIndex, shapeIndex);
     }
 
-    private Card(final int number, final int shapeIndex) {
-        this.shape = TrumpShape.findBy(shapeIndex);
-        this.number = TrumpNumber.findBy(number);
+    private Card(final int numberIndex, final int shapeIndex) {
+        this.shape = TrumpShape.indexOf(shapeIndex);
+        this.number = TrumpNumber.indexOf(numberIndex);
     }
 
     public TrumpNumber getNumber() {
         return number;
     }
 
+    public boolean isA() {
+        return number.isA();
+    }
+
     @Override
     public String toString() {
-        return number.toString() + shape.toString();
+        return number + shape.value();
     }
 
     @Override
@@ -30,10 +32,5 @@ public class Card {
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
         return number == card.number && shape == card.shape;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number, shape);
     }
 }
