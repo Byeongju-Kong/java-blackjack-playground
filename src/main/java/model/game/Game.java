@@ -37,7 +37,7 @@ public class Game {
         Participant dealer = participants.stream()
                 .filter(participant -> participant.getName().value().equals("Dealer"))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("aa"));
+                .orElseThrow(() -> new RuntimeException("Dealer가 게임에 참가하지 않았습니다."));
         if (dealer.hasCardsLowerThan16()) {
             dealer.draw(cardDeck.provideNewCard());
             return true;
