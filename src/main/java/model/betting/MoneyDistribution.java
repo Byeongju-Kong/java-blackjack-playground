@@ -3,10 +3,11 @@ package model.betting;
 import model.participant.vo.Name;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MoneyDistribution {
-    private final Map<Name, BettingMoney> moneysOfParticipants;
+    private final Map<Name, BettingMoney> bettingMoneysOfParticipants;
     private final Map<Name, Integer> finalMoney;
     private final int sumOfParticipantsMoney;
 
@@ -15,29 +16,31 @@ public class MoneyDistribution {
     }
 
     private MoneyDistribution(final Map<Name, BettingMoney> moneysOfParticipants) {
-        this.moneysOfParticipants = moneysOfParticipants;
+        this.bettingMoneysOfParticipants = moneysOfParticipants;
         finalMoney = new HashMap<>();
         sumOfParticipantsMoney = moneysOfParticipants.values().stream()
                 .mapToInt(BettingMoney::value)
                 .sum();
     }
 
-    public Map<Name, Integer> getDistributedMoneyOfGameThatWinnerIs(final Name winnerName) {
-        distributeMoneyBasedOn(winnerName);
+    public Map<Name, Integer> getDistributedMoneyOfGameThatWinnerIs(final List<Name> winnerNames) {
+        distributeMoneyBasedOn(winnerNames);
         return finalMoney;
     }
 
-    private void distributeMoneyBasedOn(final Name winnerName) {
-        int moneyOfWinner = moneysOfParticipants.get(winnerName).value();
-        int sumOfParticipantsMoneyExceptWinner = sumOfParticipantsMoney - moneyOfWinner;
-        finalMoney.put(winnerName, moneyOfWinner);
-        moneysOfParticipants.keySet().stream()
-                .filter(participantName -> !participantName.equals(winnerName))
+    private void distributeMoneyBasedOn(final List<Name> winnerNames) {
+        int sumOfWinnersMoney = winnerNames.stream()
+                .mapToInt(winnerName -> bettingMoneysOfParticipants.get(winnerName).value())
+                .sum();
+        int sumOfParticipantsMoneyExceptWinners = sumOfParticipantsMoney - sumOfWinnersMoney;
+        winnerNames.forEach(winnerName -> finalMoney.put(winnerName, bettingMoneysOfParticipants.get(winnerName).value()));
+        bettingMoneysOfParticipants.keySet().stream()
+                .filter(participantName -> !winnerNames.contains(participantName))
                 .forEach(this::makeMoneyOfLoserMinus);
-        finalMoney.put(Name.create("Dealer"), sumOfParticipantsMoneyExceptWinner - moneyOfWinner);
+        finalMoney.put(Name.create("Dealer"), sumOfParticipantsMoneyExceptWinners - sumOfWinnersMoney);
     }
 
     private void makeMoneyOfLoserMinus(final Name loser) {
-        finalMoney.put(loser, moneysOfParticipants.get(loser).value() * -1);
+        finalMoney.put(loser, bettingMoneysOfParticipants.get(loser).value() * -1);
     }
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,12 +31,13 @@ class MoneyDistributionTest {
     @DisplayName("게임 결과에 대한 금액을 반환한다.")
     void getDistributedMoneyOfGameThatWinnerIs() {
         MoneyDistribution moneyDistribution = MoneyDistribution.create(moneysOfParticipants);
-        Map<Name, Integer> actual = moneyDistribution.getDistributedMoneyOfGameThatWinnerIs(brandon);
+        List<Name> winnerNames = Arrays.asList(henry, paul);
+        Map<Name, Integer> actual = moneyDistribution.getDistributedMoneyOfGameThatWinnerIs(winnerNames);
         assertAll(
-                () -> assertThat(actual).containsEntry(brandon, 30000),
-                () -> assertThat(actual).containsEntry(henry, -10000),
-                () -> assertThat(actual).containsEntry(paul, -10000),
-                () -> assertThat(actual).containsEntry(dealer, -10000)
+                () -> assertThat(actual).containsEntry(brandon, -30000),
+                () -> assertThat(actual).containsEntry(henry, 10000),
+                () -> assertThat(actual).containsEntry(paul, 10000),
+                () -> assertThat(actual).containsEntry(dealer, 10000)
         );
     }
 }
