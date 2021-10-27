@@ -33,6 +33,10 @@ public class Participant {
         return name;
     }
 
+    public boolean hasName(final String name) {
+        return this.name.value().equals(name);
+    }
+
     public boolean hasHigherCardsThan(final Participant another) {
         return cards.hasHigherSumOfCardValuesThan(another.cards);
     }
@@ -41,12 +45,12 @@ public class Participant {
         return cards.isLowerThan16();
     }
 
-    public boolean doesOccurBust() {
-        return cards.getStatus() == BlackJackStatus.BUST;
-    }
-
     public boolean hasBlackJackCard() {
         return cards.getStatus() == BlackJackStatus.BLACKJACK;
+    }
+
+    public boolean canDrawCards() {
+        return cards.getStatus() == BlackJackStatus.LOWER_THAN_21;
     }
 
     @Override
