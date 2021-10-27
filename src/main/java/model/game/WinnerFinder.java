@@ -34,7 +34,6 @@ public class WinnerFinder {
 
     private List<Name> findWinnersInNoOneBlackJackCondition() {
         return participants.stream()
-                .filter(participant -> !participant.doesOccurBust())
                 .filter(this::hasHighestCards)
                 .map(Participant::getName)
                 .collect(Collectors.toUnmodifiableList());
