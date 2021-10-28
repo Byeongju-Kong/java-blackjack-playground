@@ -1,6 +1,7 @@
 package model.game;
 
 import model.card.CardDeck;
+import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.Participant;
 import model.participant.vo.Name;
@@ -41,6 +42,14 @@ public class Game {
 
     Card provideNewCard() {
         return cardDeck.provideNewCard();
+    }
+
+    public Cards getCardsOf(final String name) {
+        return participants.stream()
+                .filter(participant -> participant.hasName(name))
+                .findAny()
+                .map(Participant::getCards)
+                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."));
     }
 
     public List<Name> getWinner() {

@@ -68,6 +68,14 @@ class GameTest {
     }
 
     @Test
+    @DisplayName("이름 값을 받아 이름에 해당하는 참가자의 카드를 반환한다.")
+    void getCardsOf() {
+        List<Card> actual = game.getCardsOf("Brandon").getCards();
+        List<Card> expected = Arrays.asList(Card.generate(1, 1), Card.generate(10, 2));
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     @DisplayName("승자(들)를 반환한다")
     void getWinner() {
         List<Name> winners = game.getWinner();
