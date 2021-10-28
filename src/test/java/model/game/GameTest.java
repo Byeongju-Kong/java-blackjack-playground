@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class GameTest {
-    List<Card> initialCards = Arrays.asList(
-            Card.generate(1, 1), Card.generate(4, 2),
+    List<Card> cards = Arrays.asList(
+            Card.generate(1, 1), Card.generate(10, 2),
             Card.generate(1, 2), Card.generate(2, 3),
             Card.generate(2, 3), Card.generate(5, 3),
-            Card.generate(3, 3));
+            Card.generate(8, 3), Card.generate(3, 2));
     private int cardIndex = 0;
     String[] names = new String[]{"Brandon", "Henry"};
 
@@ -37,27 +38,32 @@ class GameTest {
         }
 
         private List<Card> provideInitialCards() {
-            return new ArrayList<>(Arrays.asList(initialCards.get(cardIndex++), initialCards.get(cardIndex++)));
+            return new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++)));
+        }
+
+        @Override
+        protected Card provideNewCard() {
+            return cards.get(cardIndex++);
         }
     };
 
+    @ParameterizedTest
+    @DisplayName("이름 값을 받아 이름에 해당 하는 참가자가 추가 카드를 받을 수 있는지 반환한다.")
+    @CsvSource({"Brandon, false", "Henry, true"})
+    void canGiveNewCardTo(String name, boolean expected) {
+        boolean actual = game.canGiveNewCardTo(name);
+        assertThat(actual).isEqualTo(expected);
+    }
+
     @Test
-    @DisplayName("참가자들을 반환한다.")
-    void getParticipants() {
-        List<Participant> participants = game.getParticipants();
-        List<Card> expectedCardsOfBrandon =
-                Arrays.asList(Card.generate(1, 1), Card.generate(4, 2));
-        List<Card> expectedCardsOfHenry =
-                Arrays.asList(Card.generate(1, 2), Card.generate(2, 3));
-        List<Card> expectedCardsOfDealer =
-                Arrays.asList(Card.generate(2, 3), Card.generate(5, 3));
+    @DisplayName("이름 값을 받아 이름에 해당하는 참가자에게 새로운 카드를 지급한다.")
+    void giveNewCardTo() {
+        game.giveNewCardTo("Henry");
+        List<Name> winners = game.getWinner();
         assertAll(
-                () -> assertThat(participants.get(0).getName()).isEqualTo(Name.create("Brandon")),
-                () -> assertThat(participants.get(0).getCards().getCards()).isEqualTo(expectedCardsOfBrandon),
-                () -> assertThat(participants.get(1).getName()).isEqualTo(Name.create("Henry")),
-                () -> assertThat(participants.get(1).getCards().getCards()).isEqualTo(expectedCardsOfHenry),
-                () -> assertThat(participants.get(2).getName()).isEqualTo(Name.create("Dealer")),
-                () -> assertThat(participants.get(2).getCards().getCards()).isEqualTo(expectedCardsOfDealer)
+                () -> assertThat(winners.size()).isEqualTo(2),
+                () -> assertThat(winners.get(0)).isEqualTo(Name.create("Brandon")),
+                () -> assertThat(winners.get(1)).isEqualTo(Name.create("Henry"))
         );
     }
 
@@ -87,7 +93,7 @@ class GameTest {
             }
 
             private List<Card> provideInitialCards() {
-                return new ArrayList<>(Arrays.asList(initialCards.get(cardIndex++), initialCards.get(cardIndex++)));
+                return new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++)));
             }
         };
         assertThat(game.checkDealerHasCardsLowerThan16()).isEqualTo(expected);

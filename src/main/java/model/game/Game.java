@@ -1,6 +1,7 @@
 package model.game;
 
 import model.card.CardDeck;
+import model.card.vo.Card;
 import model.participant.Participant;
 import model.participant.vo.Name;
 
@@ -16,7 +17,7 @@ public class Game {
         participants = participate(names);
     }
 
-    protected List<Participant> participate(final String[] names) {
+    List<Participant> participate(final String[] names) {
         List<Participant> participants = new ArrayList<>();
         Arrays.stream(names)
                 .forEach(name -> participants.add(Participant.participate(name, cardDeck.provideInitialCards())));
@@ -24,8 +25,22 @@ public class Game {
         return participants;
     }
 
-    public List<Participant> getParticipants() {
-        return participants;
+    public boolean canGiveNewCardTo(final String name) {
+        Participant drawer = participants.stream()
+                .filter(participant -> participant.hasName(name))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."));
+        return drawer.canDrawCards();
+    }
+
+    public void giveNewCardTo(final String name) {
+        participants.stream()
+                .filter(participant -> participant.hasName(name))
+                .forEach(participant -> participant.draw(provideNewCard()));
+    }
+
+    Card provideNewCard() {
+        return cardDeck.provideNewCard();
     }
 
     public List<Name> getWinner() {
@@ -35,7 +50,7 @@ public class Game {
 
     public boolean checkDealerHasCardsLowerThan16() {
         Participant dealer = participants.stream()
-                .filter(participant -> participant.getName().value().equals("Dealer"))
+                .filter(participant -> participant.hasName("Dealer"))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Dealer가 게임에 참가하지 않았습니다."));
         if (dealer.hasCardsLowerThan16()) {
