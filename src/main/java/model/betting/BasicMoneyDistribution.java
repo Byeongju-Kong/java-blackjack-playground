@@ -6,16 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MoneyDistribution {
+public class BasicMoneyDistribution {
     private final Map<Name, BettingMoney> bettingMoneysOfParticipants;
     private final Map<Name, Integer> finalMoney;
     private final int sumOfParticipantsMoney;
 
-    public static MoneyDistribution create(final Map<Name, BettingMoney> moneysOfParticipants) {
-        return new MoneyDistribution(moneysOfParticipants);
+    public static BasicMoneyDistribution create(final Map<Name, BettingMoney> moneysOfParticipants) {
+        return new BasicMoneyDistribution(moneysOfParticipants);
     }
 
-    private MoneyDistribution(final Map<Name, BettingMoney> moneysOfParticipants) {
+    private BasicMoneyDistribution(final Map<Name, BettingMoney> moneysOfParticipants) {
         this.bettingMoneysOfParticipants = moneysOfParticipants;
         finalMoney = new HashMap<>();
         sumOfParticipantsMoney = moneysOfParticipants.values().stream()

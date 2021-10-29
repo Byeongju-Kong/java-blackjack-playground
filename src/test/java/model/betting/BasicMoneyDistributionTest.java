@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class MoneyDistributionTest {
+class BasicMoneyDistributionTest {
     private final Map<Name, BettingMoney> moneysOfParticipants = new HashMap<>();
     private final Name brandon = Name.create("Brandon");
     private final Name henry = Name.create("Henry");
@@ -30,7 +30,7 @@ class MoneyDistributionTest {
     @Test
     @DisplayName("게임 결과에 대한 금액을 반환한다.")
     void getDistributedMoneyOfGameThatWinnerIs() {
-        MoneyDistribution moneyDistribution = MoneyDistribution.create(moneysOfParticipants);
+        BasicMoneyDistribution moneyDistribution = BasicMoneyDistribution.create(moneysOfParticipants);
         List<Name> winnerNames = Arrays.asList(henry, paul);
         Map<Name, Integer> actual = moneyDistribution.getDistributedMoneyOfGameThatWinnerIs(winnerNames);
         assertAll(
