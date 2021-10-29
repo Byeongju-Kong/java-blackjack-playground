@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface MoneyDistribution {
-    Map<Name, Integer> getDistributedMoneyOfGameThatWinnerIs(final List<Name> winnerNames);
+    Map<String, Integer> getDistributedMoneyOfGameThatWinnerIs(final List<Name> winnerNames);
 }
