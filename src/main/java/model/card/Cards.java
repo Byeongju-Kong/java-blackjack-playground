@@ -29,6 +29,10 @@ public class Cards {
         sumOfCardValues = Sum.create(values);
     }
 
+    public int getSumOfCardValues() {
+        return sumOfCardValues.value();
+    }
+
     public BlackJackStatus getStatus() {
         return checkStatus(sumOfCardValues.value());
     }
