@@ -25,14 +25,13 @@ class GameTest {
             Card.generate(2, 3), Card.generate(5, 3),
             Card.generate(8, 3), Card.generate(3, 2));
     private int cardIndex = 0;
-    String[] names = new String[]{"Brandon", "Henry"};
+    List<String> names = Arrays.asList("Brandon", "Henry");
 
     Game game = new Game(names) {
         @Override
-        public List<Participant> participate(final String[] names) {
+        public List<Participant> participate(final List<String> names) {
             List<Participant> participants = new ArrayList<>();
-            Arrays.stream(names)
-                    .forEach(name -> participants.add(Participant.participate(name, provideInitialCards())));
+            names.forEach(name -> participants.add(Participant.participate(name, provideInitialCards())));
             participants.add(Participant.participate("Dealer", provideInitialCards()));
             return participants;
         }
@@ -92,10 +91,9 @@ class GameTest {
         cardIndex = 0;
         Game game = new Game(names) {
             @Override
-            public List<Participant> participate(final String[] names) {
+            public List<Participant> participate(final List<String> names) {
                 List<Participant> participants = new ArrayList<>();
-                Arrays.stream(names)
-                        .forEach(name -> participants.add(Participant.participate(name, provideInitialCards())));
+                names.forEach(name -> participants.add(Participant.participate(name, provideInitialCards())));
                 participants.add(Participant.participate("Dealer", dealerCards));
                 return participants;
             }
