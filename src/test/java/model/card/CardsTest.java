@@ -69,6 +69,16 @@ class CardsTest {
         );
     }
 
+    @Test
+    @DisplayName("카드의 합을 반환한다.")
+    void getSumOfCardsValues() {
+        List<Card> initialCards = Arrays.asList(Card.generate(1, 1), Card.generate(11, 1));
+        Cards cards = Cards.generate(initialCards);
+        int actual = cards.getSumOfCardValues();
+        int expected = 21;
+        assertThat(actual).isEqualTo(expected);
+    }
+
     @ParameterizedTest
     @DisplayName("카드의 합이 16보다 큰 지 반환한다.")
     @MethodSource("provideCardsAndHigherThan16")
