@@ -2,16 +2,17 @@ package view;
 
 import java.util.Scanner;
 
-public class InputDisplay implements InputView{
+public class InputDisplay implements InputView {
     private static final String DELIMITER = ",";
     private final Scanner scanner;
 
     public InputDisplay(final Scanner scanner) {
         this.scanner = scanner;
     }
-    
+
     @Override
     public String[] inputPlayerNames() {
+        System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
         return scanner.nextLine().split(DELIMITER);
     }
 
