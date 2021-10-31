@@ -42,7 +42,9 @@ public class Cards {
     }
 
     public boolean hasHigherSumOfCardValuesThan(final Cards cards) {
-        return this.sumOfCardValues.value() <= 21 &&
-                this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
+        if (this.sumOfCardValues.value() > 21) {
+            return false;
+        }
+        return this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
     }
 }
