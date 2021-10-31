@@ -11,7 +11,7 @@ public class OutputDisplay implements OutputView {
 
     @Override
     public void showGameStart(List<String> playerNames) {
-        StringBuilder message = new StringBuilder("Dealer와 ");
+        StringBuilder message = new StringBuilder("\nDealer와 ");
         playerNames.forEach(name -> message.append(name).append(DELIMITER).append(SPACE));
         message.deleteCharAt(message.lastIndexOf(DELIMITER));
         message.append("에게 두 장의 카드를 나누었습니다.");
@@ -23,6 +23,7 @@ public class OutputDisplay implements OutputView {
         StringBuilder message = new StringBuilder(name + "의 카드 : ");
         cards.getCards().forEach(card -> message.append(card).append(DELIMITER).append(SPACE));
         message.deleteCharAt(message.lastIndexOf(DELIMITER));
+        message.deleteCharAt(message.lastIndexOf(SPACE));
         System.out.println(message);
     }
 
@@ -41,6 +42,7 @@ public class OutputDisplay implements OutputView {
         StringBuilder message = new StringBuilder(name + "카드 : ");
         cards.getCards().forEach(card -> message.append(card).append(DELIMITER).append(SPACE));
         message.deleteCharAt(message.lastIndexOf(DELIMITER));
+        message.deleteCharAt(message.lastIndexOf(SPACE));
         message.append(" - 결과 : ").append(cards.getSumOfCardValues());
         System.out.println(message);
     }
