@@ -3,8 +3,9 @@ package view;
 import model.card.Cards;
 
 import java.util.List;
+import java.util.Map;
 
-public class OutputDisplay implements OutputView{
+public class OutputDisplay implements OutputView {
     private static final String DELIMITER = ",";
 
     @Override
@@ -41,5 +42,12 @@ public class OutputDisplay implements OutputView{
         message.deleteCharAt(message.lastIndexOf(DELIMITER));
         message.append(" - 결과 : ").append(cards.getSumOfCardValues());
         System.out.println(message);
+    }
+
+    @Override
+    public void showFinalMoney(final Map<String, Integer> finalMoneys) {
+        System.out.println("## 최종 수익");
+        finalMoneys.keySet().
+                forEach(name -> System.out.println(name + " : " + finalMoneys.get(name)));
     }
 }
