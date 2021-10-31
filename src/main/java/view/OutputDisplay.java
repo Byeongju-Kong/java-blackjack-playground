@@ -29,10 +29,10 @@ public class OutputDisplay implements OutputView {
     @Override
     public void alertNewCardOfDealer(final boolean drawingNewCard) {
         if (drawingNewCard) {
-            System.out.println("Dealer의 카드는 16이하라 한장의 카드를 더 받았습니다.");
+            System.out.println("\nDealer의 카드는 16이하라 한장의 카드를 더 받았습니다.\n");
         }
         if (!drawingNewCard) {
-            System.out.println("Dealer의 카드는 17이상이라 한장의 카드를 더 받지 않았습니다.");
+            System.out.println("\nDealer의 카드는 17이상이라 한장의 카드를 더 받지 않았습니다.\n");
         }
     }
 
