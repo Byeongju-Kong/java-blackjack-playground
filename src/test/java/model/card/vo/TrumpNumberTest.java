@@ -42,12 +42,13 @@ class TrumpNumberTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("숫자가 A인지 여부를 반환한다.")
-    void isA() {
-        TrumpNumber trumpNumber = TrumpNumber.indexOf(1);
+    @CsvSource({"1, true", "3, false"})
+    void isA(int numberIndex, boolean expected) {
+        TrumpNumber trumpNumber = TrumpNumber.indexOf(numberIndex);
         boolean actual = trumpNumber.isA();
-        assertThat(actual).isTrue();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
