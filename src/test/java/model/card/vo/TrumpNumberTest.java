@@ -1,7 +1,6 @@
 package model.card.vo;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -42,12 +41,13 @@ class TrumpNumberTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("숫자가 A인지 여부를 반환한다.")
-    void isA() {
-        TrumpNumber trumpNumber = TrumpNumber.indexOf(1);
+    @CsvSource({"1, true", "3, false"})
+    void isA(int numberIndex, boolean expected) {
+        TrumpNumber trumpNumber = TrumpNumber.indexOf(numberIndex);
         boolean actual = trumpNumber.isA();
-        assertThat(actual).isTrue();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
