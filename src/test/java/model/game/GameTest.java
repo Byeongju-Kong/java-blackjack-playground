@@ -1,5 +1,6 @@
 package model.game;
 
+import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.Participant;
 import model.participant.vo.Name;
@@ -36,8 +37,8 @@ class GameTest {
             return participants;
         }
 
-        private List<Card> provideInitialCards() {
-            return new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++)));
+        private Cards provideInitialCards() {
+            return Cards.generate(new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++))));
         }
 
         @Override
@@ -87,7 +88,7 @@ class GameTest {
     @ParameterizedTest
     @DisplayName("Dealer의 카드가 16이하면 false를 반환하고 ")
     @MethodSource("provideDealerCardsAndLowerThan16")
-    void checkDealerHasCardsLowerThan16(List<Card> dealerCards, boolean expected) {
+    void checkDealerHasCardsLowerThan16(Cards dealerCards, boolean expected) {
         cardIndex = 0;
         Game game = new Game(names) {
             @Override
@@ -98,8 +99,8 @@ class GameTest {
                 return participants;
             }
 
-            private List<Card> provideInitialCards() {
-                return new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++)));
+            private Cards provideInitialCards() {
+                return Cards.generate(new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++))));
             }
         };
         assertThat(game.checkDealerHasCardsLowerThan16()).isEqualTo(expected);
@@ -107,10 +108,10 @@ class GameTest {
 
     private static Stream<Arguments> provideDealerCardsAndLowerThan16() {
         return Stream.of(
-                Arguments.of(new ArrayList<>(
-                        Arrays.asList(Card.generate(1, 1), Card.generate(8, 1))), false),
-                Arguments.of(new ArrayList<>(
-                        Arrays.asList(Card.generate(2, 1), Card.generate(8, 1))), true)
+                Arguments.of(Cards.generate(new ArrayList<>(
+                        Arrays.asList(Card.generate(1, 1), Card.generate(8, 1)))), false),
+                Arguments.of(Cards.generate(new ArrayList<>(
+                        Arrays.asList(Card.generate(2, 1), Card.generate(8, 1)))), true)
         );
     }
 }

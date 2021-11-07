@@ -5,19 +5,18 @@ import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.vo.Name;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Participant {
     protected Name name;
     Cards cards;
 
-    public static Participant participate(final String name, final List<Card> initialCards) {
+    public static Participant participate(final String name, final Cards initialCards) {
         return new Participant(name, initialCards);
     }
 
-    private Participant(final String name, final List<Card> initialCards) {
-        this.cards = Cards.generate(initialCards);
+    private Participant(final String name, final Cards initialCards) {
+        this.cards = initialCards;
         this.name = Name.create(name);
     }
 
