@@ -107,4 +107,14 @@ class CardsTest {
         boolean actual = firstCards.hasHigherSumOfCardValuesThan(secondCards);
         assertThat(actual).isTrue();
     }
+
+    @Test
+    @DisplayName("Cards 객체를 받아 카드들을 기준으로 같은지 반환한다.")
+    void equals() {
+        Cards firstCards =
+                Cards.generate(Arrays.asList(Card.generate(1, 1), Card.generate(8, 1)));
+        Cards secondCards =
+                Cards.generate(Arrays.asList(Card.generate(1, 1), Card.generate(8, 1)));
+        assertThat(firstCards).isEqualTo(secondCards);
+    }
 }

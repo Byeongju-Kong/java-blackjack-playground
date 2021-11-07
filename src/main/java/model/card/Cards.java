@@ -4,6 +4,7 @@ import model.BlackJackStatus;
 import model.card.vo.Card;
 
 import java.util.List;
+import java.util.Objects;
 
 import static model.BlackJackStatus.checkStatus;
 
@@ -46,5 +47,18 @@ public class Cards {
             return false;
         }
         return this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cards cards = (Cards) o;
+        return Objects.equals(values, cards.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values);
     }
 }
