@@ -4,9 +4,9 @@ import model.card.Cards;
 import model.card.vo.Card;
 
 public interface State {
-    State draw(Card newCard);
+    State draw(final Card newCard);
     State stay();
     boolean isFinished();
     Cards cards();
-    int profit(int bettingMoney);
+    int profit(final int bettingMoney);
 }
