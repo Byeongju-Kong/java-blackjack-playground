@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -97,15 +96,6 @@ class ParticipantTest {
         Participant first = Participant.participate("Brandon", firstCards);
         Participant second = Participant.participate("Henry", secondCards);
         assertThat(first.hasHigherCardsThan(second)).isTrue();
-    }
-
-    @Test
-    @DisplayName("가지고 있는 카드가 16 이하 인지 반환한다.")
-    void hasCardsLowerThan16() {
-        Cards lowerCardsThan16 = Cards.generate(
-                Arrays.asList(Card.generate(3, 1), Card.generate(10, 1)));
-        Participant participant = Participant.participate("Brandon", lowerCardsThan16);
-        assertThat(participant.hasCardsLowerThan16()).isTrue();
     }
 
     @Test
