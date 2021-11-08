@@ -1,5 +1,6 @@
 package model.game;
 
+import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.Participant;
 import model.participant.vo.Name;
@@ -35,7 +36,7 @@ class WinnerFinderTest {
         );
     }
 
-    private List<Card> provideInitialCards() {
-        return new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++)));
+    private Cards provideInitialCards() {
+        return Cards.generate(new ArrayList<>(Arrays.asList(cards.get(cardIndex++), cards.get(cardIndex++))));
     }
 }

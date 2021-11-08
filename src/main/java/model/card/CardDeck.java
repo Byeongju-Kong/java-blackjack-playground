@@ -23,8 +23,8 @@ public class CardDeck {
         return new CardDeck();
     }
 
-    public List<Card> provideInitialCards() {
-        return new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard()));
+    public Cards provideInitialCards() {
+        return Cards.generate(new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard())));
     }
 
     public Card provideNewCard() {

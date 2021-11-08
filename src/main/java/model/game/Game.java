@@ -3,6 +3,7 @@ package model.game;
 import model.card.CardDeck;
 import model.card.Cards;
 import model.card.vo.Card;
+import model.participant.Dealer;
 import model.participant.Participant;
 import model.participant.vo.Name;
 
@@ -20,7 +21,7 @@ public class Game {
     List<Participant> participate(final List<String> names) {
         List<Participant> participants = new ArrayList<>();
         names.forEach(name -> participants.add(Participant.participate(name, cardDeck.provideInitialCards())));
-        participants.add(Participant.participate("Dealer", cardDeck.provideInitialCards()));
+        participants.add(Dealer.participate(cardDeck.provideInitialCards()));
         return participants;
     }
 
@@ -56,10 +57,11 @@ public class Game {
     }
 
     public boolean checkDealerHasCardsLowerThan16() {
-        Participant dealer = participants.stream()
-                .filter(participant -> participant.hasName("Dealer"))
+        Dealer dealer = (Dealer) participants.stream()
+                .filter(Dealer.class::isInstance)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Dealer가 게임에 참가하지 않았습니다."));
+
         if (dealer.hasCardsLowerThan16()) {
             dealer.draw(cardDeck.provideNewCard());
             return true;

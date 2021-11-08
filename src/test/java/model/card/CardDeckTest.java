@@ -35,8 +35,8 @@ class CardDeckTest {
     @Test
     @DisplayName("초기 카드 2장을 반환한다.")
     void provideInitialCards() {
-        List<Card> initialCards = cardProvider.provideInitialCards();
-        assertThat(initialCards).isEqualTo(Arrays.asList(Card.generate(1, 1), Card.generate(2, 2)));
+        Cards initialCards = cardProvider.provideInitialCards();
+        assertThat(initialCards.getCards()).isEqualTo(Arrays.asList(Card.generate(1, 1), Card.generate(2, 2)));
     }
 
     @Test
