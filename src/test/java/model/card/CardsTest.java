@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class CardsTest {
     private final List<Card> initialCards =
@@ -25,6 +24,15 @@ class CardsTest {
         Cards cards = Cards.generate(initialCards);
         List<Card> actual = cards.getCards();
         assertThat(actual).isEqualTo(initialCards);
+    }
+
+    @Test
+    @DisplayName("카드의 합을 반환한다.")
+    void getSumOfCardValues() {
+        Cards cards = Cards.generate(initialCards);
+        int actual = cards.getSumOfCardValues();
+        int expected = 13;
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -40,7 +48,7 @@ class CardsTest {
     }
 
     @ParameterizedTest
-    @DisplayName("카드의 합이 16보다 큰 지 반환한다.")
+    @DisplayName("카드의 합이 16보다 작은지 반환한다.")
     @MethodSource("provideCardsAndLowerThan16")
     void isLowerThan16(List<Card> initialCards, boolean expected) {
         Cards cards = Cards.generate(initialCards);
@@ -58,7 +66,7 @@ class CardsTest {
     }
 
     @ParameterizedTest
-    @DisplayName("카드의 합이 16보다 큰 지 반환한다.")
+    @DisplayName("카드의 합이 21보다 큰 지 반환한다.")
     @MethodSource("provideCardsAndHigherThan21")
     void isHigherThan21(List<Card> initialCards, boolean expected) {
         Cards cards = Cards.generate(initialCards);
@@ -72,6 +80,26 @@ class CardsTest {
                         Card.generate(7, 3)), true),
                 Arguments.of(Arrays.asList(Card.generate(7, 1), Card.generate(9, 1),
                         Card.generate(2, 3)), false)
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("카드의 개수가 2개이고, 카드의 합이 21인지 반환한다.")
+    @MethodSource("provideCardsAndTwoCardOf21")
+    void hasSumOf21ComposedWithTwoCard(List<Card> initialCards, boolean expected) {
+        Cards cards = Cards.generate(initialCards);
+        boolean actual = cards.hasSumOf21ComposedWithTwoCard();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideCardsAndTwoCardOf21() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(Card.generate(1, 1), Card.generate(10, 1)),
+                        true),
+                Arguments.of(Arrays.asList(Card.generate(3, 1), Card.generate(10, 1)),
+                        false),
+                Arguments.of(Arrays.asList(Card.generate(8, 1), Card.generate(9, 1),
+                        Card.generate(4, 3)), false)
         );
     }
 

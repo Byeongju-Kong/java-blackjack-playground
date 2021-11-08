@@ -27,6 +27,10 @@ public class Cards {
         sumOfCardValues = Sum.create(values);
     }
 
+    public int getSumOfCardValues() {
+        return sumOfCardValues.value();
+    }
+
     public boolean isLowerThan16() {
         return sumOfCardValues.value() <= 16;
     }
@@ -40,6 +44,10 @@ public class Cards {
             return false;
         }
         return this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
+    }
+
+    public boolean hasSumOf21ComposedWithTwoCard() {
+        return values.size() == 2 && sumOfCardValues.value() == 21;
     }
 
     @Override
