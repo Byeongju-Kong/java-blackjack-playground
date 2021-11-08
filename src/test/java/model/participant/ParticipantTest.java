@@ -16,13 +16,14 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ParticipantTest {
+    private final Cards initialCards = Cards.generate(
+            new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1))));
+    private final Participant participant = Participant.participate("Brandon", initialCards);
+
     @ParameterizedTest
     @DisplayName("카드를 더 draw 할 수 있는지 반환한다.")
     @MethodSource("provideNewCardAndIsDefeater")
     void isDefeater(Card newCard, boolean expected) {
-        Cards initialCards = Cards.generate(
-                new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1))));
-        Participant participant = Participant.participate("Brandon", initialCards);
         participant.draw(newCard);
         boolean actual = participant.canDrawCards();
         assertThat(actual).isEqualTo(expected);
@@ -58,10 +59,6 @@ class ParticipantTest {
     @Test
     @DisplayName("카드들을 반환한다.")
     void getCards() {
-        Cards initialCards = Cards.generate(Arrays.asList(
-                Card.generate(6, 1), Card.generate(11, 1),
-                Card.generate(1, 1)));
-        Participant participant = Participant.participate("Brandon", initialCards);
         Cards cards = participant.getCards();
         assertThat(cards.getCards()).isEqualTo(initialCards.getCards());
     }
@@ -69,9 +66,6 @@ class ParticipantTest {
     @Test
     @DisplayName("이름을 반환한다.")
     void getName() {
-        Cards anyCards = Cards.generate(
-                Arrays.asList(Card.generate(10, 1), Card.generate(11, 1)));
-        Participant participant = Participant.participate("Brandon", anyCards);
         Name actual = participant.getName();
         Name expected = Name.create("Brandon");
         assertThat(actual).isEqualTo(expected);
@@ -80,22 +74,24 @@ class ParticipantTest {
     @Test
     @DisplayName("문자열을 받아 자신의 이름 값과 같은지 반환한다.")
     void hasName() {
-        Cards anyCards = Cards.generate(
-                Arrays.asList(Card.generate(10, 1), Card.generate(11, 1)));
-        Participant participant = Participant.participate("Brandon", anyCards);
         assertThat(participant.hasName("Brandon")).isTrue();
     }
 
     @Test
     @DisplayName("Participant 객체를 받아 자신의 카드 합이 더 큰지 반환한다.")
     void hasHigherCardsThan() {
-        Cards firstCards = Cards.generate(
-                Arrays.asList(Card.generate(1, 1), Card.generate(10, 1)));
-        Cards secondCards = Cards.generate(
-                Arrays.asList(Card.generate(3, 1), Card.generate(10, 1)));
-        Participant first = Participant.participate("Brandon", firstCards);
-        Participant second = Participant.participate("Henry", secondCards);
-        assertThat(first.hasHigherCardsThan(second)).isTrue();
+        Cards anotherCards = Cards.generate(
+                Arrays.asList(Card.generate(4, 2), Card.generate(8, 2)));
+        Participant another = Participant.participate("Henry", anotherCards);
+        assertThat(participant.hasHigherCardsThan(another)).isTrue();
+    }
+
+    @Test
+    @DisplayName("상태를 stay로 변경한다.")
+    void stay() {
+        participant.stay();
+        boolean actual = participant.canDrawCards();
+        assertThat(actual).isFalse();
     }
 
     @Test

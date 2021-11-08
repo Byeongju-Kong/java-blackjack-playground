@@ -55,6 +55,10 @@ public class Participant {
         return !(state instanceof Finished);
     }
 
+    public void stay() {
+        state = state.stay();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
