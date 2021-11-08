@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
@@ -71,10 +72,12 @@ class ParticipantTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("문자열을 받아 자신의 이름 값과 같은지 반환한다.")
-    void hasName() {
-        assertThat(participant.hasName("Brandon")).isTrue();
+    @CsvSource({"Brandon, true", "Henry, false"})
+    void hasName(String name, boolean expected) {
+        boolean actual = participant.hasName(name);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
