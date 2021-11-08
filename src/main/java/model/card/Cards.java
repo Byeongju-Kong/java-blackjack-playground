@@ -1,12 +1,9 @@
 package model.card;
 
-import model.BlackJackStatus;
 import model.card.vo.Card;
 
 import java.util.List;
 import java.util.Objects;
-
-import static model.BlackJackStatus.checkStatus;
 
 public class Cards {
     private final List<Card> values;
@@ -30,16 +27,12 @@ public class Cards {
         sumOfCardValues = Sum.create(values);
     }
 
-    public int getSumOfCardValues() {
-        return sumOfCardValues.value();
-    }
-
-    public BlackJackStatus getStatus() {
-        return checkStatus(sumOfCardValues.value());
-    }
-
     public boolean isLowerThan16() {
         return sumOfCardValues.value() <= 16;
+    }
+
+    public boolean isHigherThan21() {
+        return sumOfCardValues.value() > 21;
     }
 
     public boolean hasHigherSumOfCardValuesThan(final Cards cards) {

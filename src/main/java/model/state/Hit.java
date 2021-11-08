@@ -10,7 +10,7 @@ public class Hit extends Running {
 
     public State draw(Card newCard) {
         cards.add(newCard);
-        if (cards.getSumOfCardValues() > 21) {
+        if (cards.isHigherThan21()) {
             return new Bust(cards);
         }
         return new Hit(cards);
