@@ -2,7 +2,7 @@ package model.participant;
 
 import model.card.Cards;
 
-public class Dealer extends Participant {
+public class Dealer extends Player {
     public static Dealer participate(final Cards initialCards) {
         return new Dealer(initialCards);
     }

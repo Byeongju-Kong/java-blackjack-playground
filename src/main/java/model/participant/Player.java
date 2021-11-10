@@ -10,15 +10,15 @@ import model.state.State;
 
 import java.util.Objects;
 
-public class Participant {
+public class Player {
     protected Name name;
     State state;
 
-    public static Participant participate(final String name, final Cards initialCards) {
-        return new Participant(name, initialCards);
+    public static Player participate(final String name, final Cards initialCards) {
+        return new Player(name, initialCards);
     }
 
-    Participant(final String name, final Cards initialCards) {
+    Player(final String name, final Cards initialCards) {
         if (initialCards.hasSumOf21ComposedWithTwoCard()) {
             this.state = new BlackJack(initialCards);
         } else if (!initialCards.hasSumOf21ComposedWithTwoCard()) {
@@ -43,7 +43,7 @@ public class Participant {
         return this.name.value().equals(name);
     }
 
-    public boolean hasHigherCardsThan(final Participant another) {
+    public boolean hasHigherCardsThan(final Player another) {
         return state.cards().hasHigherSumOfCardValuesThan(another.state.cards());
     }
 
@@ -63,7 +63,7 @@ public class Participant {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Participant that = (Participant) o;
+        Player that = (Player) o;
         return Objects.equals(name, that.name);
     }
 }

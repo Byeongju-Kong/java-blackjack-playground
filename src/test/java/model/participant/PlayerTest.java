@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ParticipantTest {
+class PlayerTest {
     private final Cards initialCards = Cards.generate(
             new ArrayList<>(Arrays.asList(Card.generate(4, 1), Card.generate(9, 1))));
-    private final Participant participant = Participant.participate("Brandon", initialCards);
+    private final Player participant = Player.participate("Brandon", initialCards);
 
     @ParameterizedTest
     @DisplayName("카드를 더 draw 할 수 있는지 반환한다.")
@@ -41,7 +41,7 @@ class ParticipantTest {
     @DisplayName("참가자의 카드가 블랙잭인지 반환한다.")
     @MethodSource("provideCardsAndHasBlackJackCards")
     void hasBlackJackCards(Cards initialCards, boolean expected) {
-        Participant participant = Participant.participate("Brandon", initialCards);
+        Player participant = Player.participate("Brandon", initialCards);
         boolean actual = participant.hasBlackJackCard();
         assertThat(actual).isEqualTo(expected);
     }
@@ -85,7 +85,7 @@ class ParticipantTest {
     void hasHigherCardsThan() {
         Cards anotherCards = Cards.generate(
                 Arrays.asList(Card.generate(4, 2), Card.generate(8, 2)));
-        Participant another = Participant.participate("Henry", anotherCards);
+        Player another = Player.participate("Henry", anotherCards);
         assertThat(participant.hasHigherCardsThan(another)).isTrue();
     }
 
@@ -104,8 +104,8 @@ class ParticipantTest {
                 Arrays.asList(Card.generate(1, 1), Card.generate(10, 1)));
         Cards secondCards = Cards.generate(
                 Arrays.asList(Card.generate(3, 1), Card.generate(10, 1)));
-        Participant first = Participant.participate("Brandon", firstCards);
-        Participant second = Participant.participate("Brandon", secondCards);
+        Player first = Player.participate("Brandon", firstCards);
+        Player second = Player.participate("Brandon", secondCards);
         assertThat(first.equals(second)).isTrue();
     }
 }
