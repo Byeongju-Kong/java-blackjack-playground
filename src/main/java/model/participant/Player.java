@@ -9,7 +9,7 @@ import model.state.running.Hit;
 
 import java.util.Objects;
 
-public class Player {
+public class Player implements Participant {
     protected Name name;
     State state;
 
