@@ -26,11 +26,11 @@ public class Game {
     }
 
     public boolean canGiveNewCardTo(final String name) {
-        Participant drawer = participants.stream()
+        return participants.stream()
                 .filter(participant -> participant.hasName(name))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."));
-        return drawer.canDrawCards();
+                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."))
+                .canDrawCards();
     }
 
     public void giveNewCardTo(final String name) {
@@ -51,21 +51,19 @@ public class Game {
                 .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."));
     }
 
+    public void stay(final String name) {
+        participants.stream().filter(participant -> participant.hasName(name)).forEach(Participant::stay);
+    }
+
     public List<Name> getWinner() {
         WinnerFinder winnerFinder = WinnerFinder.create(participants);
         return winnerFinder.getWinner();
     }
 
     public boolean checkDealerHasCardsLowerThan16() {
-        Dealer dealer = (Dealer) participants.stream()
-                .filter(Dealer.class::isInstance)
+        Dealer dealer = (Dealer) participants.stream().filter(Dealer.class::isInstance)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Dealer가 게임에 참가하지 않았습니다."));
-
-        if (dealer.hasCardsLowerThan16()) {
-            dealer.draw(cardDeck.provideNewCard());
-            return true;
-        }
-        return false;
+                .orElseThrow(() -> new IllegalArgumentException("딜러가 참가하지 않았습니다."));
+        return dealer.hasCardsLowerThan16();
     }
 }

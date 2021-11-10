@@ -2,6 +2,7 @@ package model.game;
 
 import model.card.Cards;
 import model.card.vo.Card;
+import model.participant.Dealer;
 import model.participant.Participant;
 import model.participant.vo.Name;
 import org.junit.jupiter.api.DisplayName;
@@ -59,12 +60,11 @@ class GameTest {
     @DisplayName("이름 값을 받아 이름에 해당하는 참가자에게 새로운 카드를 지급한다.")
     void giveNewCardTo() {
         game.giveNewCardTo("Henry");
-        List<Name> winners = game.getWinner();
-        assertAll(
-                () -> assertThat(winners.size()).isEqualTo(2),
-                () -> assertThat(winners.get(0)).isEqualTo(Name.create("Brandon")),
-                () -> assertThat(winners.get(1)).isEqualTo(Name.create("Henry"))
-        );
+        Cards actual = game.getCardsOf("Henry");
+        Cards expected = Cards.generate(Arrays.asList(
+                Card.generate(1, 2), Card.generate(2, 3),
+                Card.generate(8, 3)));
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -95,7 +95,7 @@ class GameTest {
             public List<Participant> participate(final List<String> names) {
                 List<Participant> participants = new ArrayList<>();
                 names.forEach(name -> participants.add(Participant.participate(name, provideInitialCards())));
-                participants.add(Participant.participate("Dealer", dealerCards));
+                participants.add(Dealer.participate(dealerCards));
                 return participants;
             }
 
