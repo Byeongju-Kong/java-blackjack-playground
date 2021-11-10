@@ -64,14 +64,6 @@ class PlayerTest {
         assertThat(cards.getCards()).isEqualTo(initialCards.getCards());
     }
 
-    @Test
-    @DisplayName("이름을 반환한다.")
-    void getName() {
-        Name actual = participant.getName();
-        Name expected = Name.create("Brandon");
-        assertThat(actual).isEqualTo(expected);
-    }
-
     @ParameterizedTest
     @DisplayName("문자열을 받아 자신의 이름 값과 같은지 반환한다.")
     @CsvSource({"Brandon, true", "Henry, false"})

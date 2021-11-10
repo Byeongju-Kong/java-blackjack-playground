@@ -35,10 +35,6 @@ public class Player {
         return state.cards();
     }
 
-    public Name getName() {
-        return name;
-    }
-
     public boolean hasName(final String name) {
         return this.name.value().equals(name);
     }
