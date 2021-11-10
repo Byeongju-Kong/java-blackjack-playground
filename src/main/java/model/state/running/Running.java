@@ -1,6 +1,7 @@
-package model.state;
+package model.state.running;
 
 import model.card.Cards;
+import model.state.Created;
 
 public abstract class Running extends Created {
     protected Running(Cards initialCards) {

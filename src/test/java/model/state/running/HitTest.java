@@ -1,7 +1,10 @@
-package model.state;
+package model.state.running;
 
 import model.card.Cards;
 import model.card.vo.Card;
+import model.state.State;
+import model.state.finished.Bust;
+import model.state.finished.Stay;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package model.state;
+package model.state.finished;
 
 import model.card.Cards;
 

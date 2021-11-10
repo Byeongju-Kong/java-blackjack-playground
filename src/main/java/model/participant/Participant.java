@@ -3,9 +3,9 @@ package model.participant;
 import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.vo.Name;
-import model.state.BlackJack;
-import model.state.Finished;
-import model.state.Hit;
+import model.state.finished.BlackJack;
+import model.state.finished.Finished;
+import model.state.running.Hit;
 import model.state.State;
 
 import java.util.Objects;
