@@ -43,10 +43,6 @@ public class Player {
         return state.cards().hasHigherSumOfCardValuesThan(another.state.cards());
     }
 
-    public boolean hasBlackJackCard() {
-        return state instanceof BlackJack;
-    }
-
     public boolean canDrawCards() {
         return !(state instanceof Finished);
     }
