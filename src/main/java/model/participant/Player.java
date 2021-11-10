@@ -3,10 +3,9 @@ package model.participant;
 import model.card.Cards;
 import model.card.vo.Card;
 import model.participant.vo.Name;
-import model.state.finished.BlackJack;
-import model.state.finished.Finished;
-import model.state.running.Hit;
 import model.state.State;
+import model.state.finished.BlackJack;
+import model.state.running.Hit;
 
 import java.util.Objects;
 
@@ -44,7 +43,7 @@ public class Player {
     }
 
     public boolean canDrawCards() {
-        return !(state instanceof Finished);
+        return !state.isFinished();
     }
 
     public void stay() {
