@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class BustTest {
     private final Cards initialCards = Cards.generate(
@@ -20,15 +21,15 @@ class BustTest {
     @DisplayName("draw 메서드를 호출하면, 더 이상 카드를 뽑을 수 없기 때문에 자기 자신을 반환한다.")
     void draw() {
         Card newCard = Card.generate(1, 1);
-        State actualStateAfterDraw = state.draw(newCard);
-        assertThat(actualStateAfterDraw).isEqualTo(state);
+        assertThatIllegalArgumentException().isThrownBy(() -> state.draw(newCard))
+                .withMessage("이미 Bust or Stay or BlackJack 상태입니다.");
     }
 
     @Test
-    @DisplayName("stay 메서드를 호출하면, 더 이상 상태를 변경할 수 없기 때문에 자기 자신을 반환한다.")
+    @DisplayName("stay 메서드를 호출하면 예외를 발생시킨다.")
     void stay() {
-        State actual = state.stay();
-        assertThat(actual).isEqualTo(state);
+        assertThatIllegalArgumentException().isThrownBy(state::stay)
+                .withMessage("이미 Bust or Stay or BlackJack 상태입니다.");
     }
 
     @Test

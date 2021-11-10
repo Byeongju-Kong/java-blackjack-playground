@@ -12,12 +12,12 @@ public abstract class Finished extends Created {
 
     @Override
     public State draw(Card newCard) {
-        return this;
+        throw new IllegalArgumentException("이미 Bust or Stay or BlackJack 상태입니다.");
     }
 
     @Override
     public State stay() {
-        return this;
+        throw new IllegalArgumentException("이미 Bust or Stay or BlackJack 상태입니다.");
     }
 
     @Override
