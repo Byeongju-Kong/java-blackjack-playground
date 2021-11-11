@@ -26,8 +26,8 @@ public abstract class Finished extends Created {
     }
 
     @Override
-    public int profit(int bettingMoney) {
-        return (int) (bettingMoney * earningRate());
+    public int profit(int money) {
+        return (int) (money * earningRate());
     }
 
     abstract double earningRate();

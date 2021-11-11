@@ -14,7 +14,7 @@ public abstract class Running extends Created {
     }
 
     @Override
-    public int profit(final int bettingMoney) {
+    public int profit(final int money) {
         return 0;
     }
 }
