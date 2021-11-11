@@ -2,7 +2,6 @@ package model.participant;
 
 import model.card.Cards;
 import model.card.vo.Card;
-import model.participant.vo.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,12 +61,35 @@ class PlayerTest {
         assertThat(participant.hasHigherCardsThan(another)).isTrue();
     }
 
+    @ParameterizedTest
+    @DisplayName("Player 객체들을 받아 자신의 카드 합이 가장 큰지 반환한다.")
+    @MethodSource("provideOtherPlayersAndExpected")
+    void hasHigherCardsThan(List<Player> others, boolean expected) {
+        boolean actual = participant.hasHigherCardsThan(others);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideOtherPlayersAndExpected() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(
+                        Player.participate("Brandon", Cards.generate(Arrays.asList(
+                                Card.generate(5, 2), Card.generate(8, 4)))),
+                        Player.participate("Brandon", Cards.generate(Arrays.asList(
+                                Card.generate(4, 2), Card.generate(7, 4))))), true),
+                Arguments.of(Arrays.asList(
+                        Player.participate("Brandon", Cards.generate(Arrays.asList(
+                                Card.generate(5, 2), Card.generate(1, 4)))),
+                        Player.participate("Brandon", Cards.generate(Arrays.asList(
+                                Card.generate(5, 2), Card.generate(8, 4))))), false)
+        );
+    }
+
     @Test
     @DisplayName("상태를 stay로 변경한다.")
     void stay() {
         participant.stay();
-        boolean actual = participant.canDrawCards();
-        assertThat(actual).isFalse();
+        boolean actual = participant.hasStayState();
+        assertThat(actual).isTrue();
     }
 
     @Test

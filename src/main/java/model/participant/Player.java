@@ -5,11 +5,13 @@ import model.card.vo.Card;
 import model.participant.vo.Name;
 import model.state.State;
 import model.state.finished.BlackJack;
+import model.state.finished.Stay;
 import model.state.running.Hit;
 
+import java.util.List;
 import java.util.Objects;
 
-public class Player implements Participant {
+public class Player {
     protected Name name;
     State state;
 
@@ -38,6 +40,10 @@ public class Player implements Participant {
         return this.name.value().equals(name);
     }
 
+    public boolean hasHigherCardsThan(final List<Player> others) {
+        return others.stream().allMatch(this::hasHigherCardsThan);
+    }
+
     public boolean hasHigherCardsThan(final Player another) {
         return state.cards().hasHigherSumOfCardValuesThan(another.state.cards());
     }
@@ -48,6 +54,10 @@ public class Player implements Participant {
 
     public void stay() {
         state = state.stay();
+    }
+
+    public boolean hasStayState() {
+        return state instanceof Stay;
     }
 
     @Override
