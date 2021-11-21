@@ -47,4 +47,18 @@ class BustTest {
         int expected = -10000;
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("블랙잭 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void win_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::win)
+                .withMessage("BUST 상태는, 필패입니다.");
+    }
+
+    @Test
+    @DisplayName("블랙잭 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void lose_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::lose)
+                .withMessage("BUST 상태는, 필패입니다.");
+    }
 }

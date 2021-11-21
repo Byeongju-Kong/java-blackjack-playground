@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class HitTest {
     private final Cards initialCards = Cards.generate(new ArrayList<>(
@@ -69,5 +70,19 @@ class HitTest {
         int actual = state.profit(bettingMoney);
         int expected = 0;
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("Hit 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void win_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::win)
+                .withMessage("아직 stay 상태가 아니라 승패를 가를 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("Hit 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void lose_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::lose)
+                .withMessage("아직 stay 상태가 아니라 승패를 가를 수 없습니다.");
     }
 }

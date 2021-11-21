@@ -46,4 +46,18 @@ class BlackJackTest {
         int expected = 15000;
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("블랙잭 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void win_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::win)
+                .withMessage("블랙잭 상태이라, 필승입니다.");
+    }
+
+    @Test
+    @DisplayName("블랙잭 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
+    void lose_Exception() {
+        assertThatIllegalArgumentException().isThrownBy(state::lose)
+                .withMessage("블랙잭 상태이라, 필승입니다.");
+    }
 }

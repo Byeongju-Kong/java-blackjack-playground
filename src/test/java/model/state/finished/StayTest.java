@@ -46,4 +46,20 @@ class StayTest {
         int expected = 0;
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("현재 카드를 지니는 Win 객체를 반환한다.")
+    void win() {
+        State actual = state.win();
+        State expected = new Win(state.cards());
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("현재 카드를 지니는 Lose 객체를 반환한다.")
+    void lose() {
+        State actual = state.lose();
+        State expected = new Lose(state.cards());
+        assertThat(actual).isEqualTo(expected);
+    }
 }
