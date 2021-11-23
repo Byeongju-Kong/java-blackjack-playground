@@ -24,7 +24,7 @@ public class Player extends Participant{
             this.state = new Hit(initialCards);
         }
         this.bettingMoney = BettingMoney.from(bettingMoney);
-        this.name = Name.create(name);
+        this.name = Name.from(name);
     }
 
     public boolean hasName(final String name) {

@@ -15,7 +15,7 @@ class TrumpShapeTest {
     @DisplayName("Index 값으로 Index에 해당하는 객체를 반환받는다.")
     @MethodSource("ProvideIndexAndTrumpShape")
     void findBy(int index, TrumpShape expectedShape, String expectedValue) {
-        TrumpShape actualShape = TrumpShape.indexOf(index);
+        TrumpShape actualShape = TrumpShape.from(index);
         String actualValue = expectedShape.value();
         assertAll(
                 () -> assertThat(actualShape).isEqualTo(expectedShape),

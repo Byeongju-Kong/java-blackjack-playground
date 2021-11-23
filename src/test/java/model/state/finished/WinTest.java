@@ -13,8 +13,8 @@ class WinTest {
     @Test
     @DisplayName("수익률을 반환한다.")
     void earningRate() {
-        Cards cards = Cards.generate(
-                Arrays.asList(Card.generate(10, 1), Card.generate(7, 2)));
+        Cards cards = Cards.from(
+                Arrays.asList(Card.of(10, 1), Card.of(7, 2)));
         Finished win = new Win(cards);
         double actual = win.earningRate();
         double expected = 1.0;

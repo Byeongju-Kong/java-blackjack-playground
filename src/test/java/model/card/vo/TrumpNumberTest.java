@@ -16,7 +16,7 @@ class TrumpNumberTest {
     @DisplayName("Index를 값으로 Index에 해당하는 객체를 반환받는다.")
     @MethodSource("provideIndexAndTrumpNumber")
     void findBy(int index, TrumpNumber expectedTrumpNumber, int expectedValue) {
-        TrumpNumber actualTrumpNumber = TrumpNumber.indexOf(index);
+        TrumpNumber actualTrumpNumber = TrumpNumber.from(index);
         int actualValue = actualTrumpNumber.value();
         assertAll(
                 () -> assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber),
@@ -45,7 +45,7 @@ class TrumpNumberTest {
     @DisplayName("숫자가 A인지 여부를 반환한다.")
     @CsvSource({"1, true", "3, false"})
     void isA(int numberIndex, boolean expected) {
-        TrumpNumber trumpNumber = TrumpNumber.indexOf(numberIndex);
+        TrumpNumber trumpNumber = TrumpNumber.from(numberIndex);
         boolean actual = trumpNumber.isA();
         assertThat(actual).isEqualTo(expected);
     }
@@ -54,7 +54,7 @@ class TrumpNumberTest {
     @DisplayName("숫자가 J, Q, K 중 하나인지를 반환한다.")
     @CsvSource({"10, true", "11, true", "12, true", "3, false"})
     void isJQK(int numberIndex, boolean expected) {
-        TrumpNumber trumpNumber = TrumpNumber.indexOf(numberIndex);
+        TrumpNumber trumpNumber = TrumpNumber.from(numberIndex);
         boolean actual = trumpNumber.isJQK();
         assertThat(actual).isEqualTo(expected);
     }

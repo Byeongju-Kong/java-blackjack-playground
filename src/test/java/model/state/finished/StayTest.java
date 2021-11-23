@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StayTest {
-    private final Cards initialCards = Cards.generate(
-            Arrays.asList(Card.generate(9, 1), Card.generate(8, 2)));
+    private final Cards initialCards = Cards.from(
+            Arrays.asList(Card.of(9, 1), Card.of(8, 2)));
     private final State state = new Stay(initialCards);
 
     @Test
     @DisplayName("draw 메서드를 호출하면, 더 이상 카드를 뽑을 수 없기 때문에 자기 자신을 반환한다.")
     void draw() {
-        Card newCard = Card.generate(1, 1);
+        Card newCard = Card.of(1, 1);
         assertThatIllegalArgumentException().isThrownBy(() -> state.draw(newCard))
                 .withMessage("이미 Bust or Stay or BlackJack 상태입니다.");
     }

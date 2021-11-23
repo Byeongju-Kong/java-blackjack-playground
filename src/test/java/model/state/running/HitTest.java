@@ -15,17 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class HitTest {
-    private final Cards initialCards = Cards.generate(new ArrayList<>(
-            Arrays.asList(Card.generate(7, 1), Card.generate(8, 2))));
+    private final Cards initialCards = Cards.from(new ArrayList<>(
+            Arrays.asList(Card.of(7, 1), Card.of(8, 2))));
     private final State state = new Hit(initialCards);
 
     @Test
     @DisplayName("draw로 새 카드를 추가하여 Bust가 발생하지 않으면 새로운 Hit 객체를 반환한다.")
     void draw_newHit() {
-        Card newCard = Card.generate(5, 1);
+        Card newCard = Card.of(5, 1);
         State actualStateAfterDraw = state.draw(newCard);
-        Cards expectedCards = Cards.generate(Arrays.asList(
-                        Card.generate(7, 1), Card.generate(8, 2), Card.generate(5, 1)));
+        Cards expectedCards = Cards.from(Arrays.asList(
+                        Card.of(7, 1), Card.of(8, 2), Card.of(5, 1)));
         State expectedStateAfterDraw = new Hit(expectedCards);
         assertThat(actualStateAfterDraw).isEqualTo(expectedStateAfterDraw);
     }
@@ -33,10 +33,10 @@ class HitTest {
     @Test
     @DisplayName("draw로 새 카드를 추가하여 Bust가 발생하면 새로운 Bust 객체를 반환한다.")
     void draw_Bust() {
-        Card newCard = Card.generate(9, 1);
+        Card newCard = Card.of(9, 1);
         State actualStateAfterDraw = state.draw(newCard);
-        Cards expectedCards = Cards.generate(Arrays.asList(
-                Card.generate(7, 1), Card.generate(8, 2), Card.generate(9, 1)));
+        Cards expectedCards = Cards.from(Arrays.asList(
+                Card.of(7, 1), Card.of(8, 2), Card.of(9, 1)));
         State expectedStateAfterDraw = new Bust(expectedCards);
         assertThat(actualStateAfterDraw).isEqualTo(expectedStateAfterDraw);
     }

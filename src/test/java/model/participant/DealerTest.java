@@ -24,11 +24,11 @@ class DealerTest {
 
     private static Stream<Arguments> provideCardsAndLowerThan16() {
         return Stream.of(
-                Arguments.of(Cards.generate(
-                        Arrays.asList(Card.generate(8, 1), Card.generate(7, 1))),
+                Arguments.of(Cards.from(
+                        Arrays.asList(Card.of(8, 1), Card.of(7, 1))),
                         true),
-                Arguments.of(Cards.generate(
-                        Arrays.asList(Card.generate(8, 1), Card.generate(9, 1))),
+                Arguments.of(Cards.from(
+                        Arrays.asList(Card.of(8, 1), Card.of(9, 1))),
                         false)
         );
     }

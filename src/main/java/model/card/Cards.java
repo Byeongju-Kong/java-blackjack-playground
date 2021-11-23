@@ -9,13 +9,13 @@ public class Cards {
     private final List<Card> values;
     private Sum sumOfCardValues;
 
-    public static Cards generate(List<Card> initialCards) {
+    public static Cards from(List<Card> initialCards) {
         return new Cards(initialCards);
     }
 
     private Cards(List<Card> initialCards) {
         values = initialCards;
-        sumOfCardValues = Sum.create(initialCards);
+        sumOfCardValues = Sum.from(initialCards);
     }
 
     public List<Card> getCards() {
@@ -24,7 +24,7 @@ public class Cards {
 
     public void add(Card newCard) {
         values.add(newCard);
-        sumOfCardValues = Sum.create(values);
+        sumOfCardValues = Sum.from(values);
     }
 
     public int getSumOfCardValues() {

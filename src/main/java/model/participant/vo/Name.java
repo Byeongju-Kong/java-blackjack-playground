@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Name {
     private final String value;
 
-    public static Name create(final String name) {
+    public static Name from(final String name) {
         return new Name(name);
     }
 

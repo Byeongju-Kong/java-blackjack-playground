@@ -14,7 +14,7 @@ public enum TrumpNumber {
         this.value = value;
     }
 
-    public static TrumpNumber indexOf(final int numberIndex) {
+    public static TrumpNumber from(final int numberIndex) {
         return Arrays.stream(TrumpNumber.values())
                 .filter(trumpNumber -> trumpNumber.numberIndex == numberIndex)
                 .findFirst()

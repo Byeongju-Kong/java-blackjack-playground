@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerTest {
-    private final Cards initialCards = Cards.generate(
-            new ArrayList<>(Arrays.asList(Card.generate(8, 1), Card.generate(10, 3))));
+    private final Cards initialCards = Cards.from(
+            new ArrayList<>(Arrays.asList(Card.of(8, 1), Card.of(10, 3))));
     private final Player player = Player.of("Chris", 10000, initialCards);
 
     @ParameterizedTest
@@ -38,12 +38,12 @@ class PlayerTest {
     @Test
     @DisplayName("카드를 한장 추가한다.")
     void draw() {
-        Card newCard = Card.generate(3, 2);
+        Card newCard = Card.of(3, 2);
         player.draw(newCard);
         Cards actual = player.getCards();
-        Cards expected = Cards.generate(
-                Arrays.asList(Card.generate(8, 1), Card.generate(10, 3),
-                        Card.generate(3, 2)));
+        Cards expected = Cards.from(
+                Arrays.asList(Card.of(8, 1), Card.of(10, 3),
+                        Card.of(3, 2)));
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -58,10 +58,10 @@ class PlayerTest {
 
     private static Stream<Arguments> provideInitialCardsAndCanDrawCards() {
         return Stream.of(
-                Arguments.of(Cards.generate(Arrays.asList(
-                        Card.generate(1, 2), Card.generate(9, 2))), true),
-                Arguments.of(Cards.generate(Arrays.asList(
-                        Card.generate(1, 2), Card.generate(10, 2))), false)
+                Arguments.of(Cards.from(Arrays.asList(
+                        Card.of(1, 2), Card.of(9, 2))), true),
+                Arguments.of(Cards.from(Arrays.asList(
+                        Card.of(1, 2), Card.of(10, 2))), false)
         );
     }
 
@@ -85,15 +85,15 @@ class PlayerTest {
 
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
-                Arguments.of(Cards.generate(Arrays.asList(
-                        Card.generate(8, 1), Card.generate(9, 4))), 10000.0),
-                Arguments.of(Cards.generate(Arrays.asList(
-                        Card.generate(10, 1), Card.generate(9, 4))), -10000.0)
+                Arguments.of(Cards.from(Arrays.asList(
+                        Card.of(8, 1), Card.of(9, 4))), 10000.0),
+                Arguments.of(Cards.from(Arrays.asList(
+                        Card.of(10, 1), Card.of(9, 4))), -10000.0)
         );
     }
 
-    private Cards anotherCards = Cards.generate(
-            Arrays.asList(Card.generate(1, 3), Card.generate(7, 3)));
+    private Cards anotherCards = Cards.from(
+            Arrays.asList(Card.of(1, 3), Card.of(7, 3)));
 
     @ParameterizedTest
     @DisplayName("이름을 기준으로 같은 객체인지 반환한다.")

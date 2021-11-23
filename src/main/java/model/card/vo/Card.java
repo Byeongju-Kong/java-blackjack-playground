@@ -4,13 +4,13 @@ public class Card {
     private final TrumpNumber number;
     private final TrumpShape shape;
 
-    public static Card generate(final int numberIndex, final int shapeIndex) {
+    public static Card of(final int numberIndex, final int shapeIndex) {
         return new Card(numberIndex, shapeIndex);
     }
 
     private Card(final int numberIndex, final int shapeIndex) {
-        this.shape = TrumpShape.indexOf(shapeIndex);
-        this.number = TrumpNumber.indexOf(numberIndex);
+        this.shape = TrumpShape.from(shapeIndex);
+        this.number = TrumpNumber.from(numberIndex);
     }
 
     public TrumpNumber getNumber() {

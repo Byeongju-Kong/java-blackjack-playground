@@ -24,13 +24,13 @@ public class CardDeck {
     }
 
     public Cards provideInitialCards() {
-        return Cards.generate(new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard())));
+        return Cards.from(new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard())));
     }
 
     public Card provideNewCard() {
         Card newCard;
         do {
-            newCard = Card.generate(generateRandomIndex(KIND_OF_NUMBER), generateRandomIndex(KIND_OF_SHAPE));
+            newCard = Card.of(generateRandomIndex(KIND_OF_NUMBER), generateRandomIndex(KIND_OF_SHAPE));
         } while (isProvidedAlready(newCard));
         providedCards.add(newCard);
         return newCard;

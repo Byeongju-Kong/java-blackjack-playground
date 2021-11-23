@@ -10,14 +10,14 @@ class NameTest {
     @Test
     @DisplayName("Blank 상태의 문자열로 객체를 생성하면 예외를 발생시킨다.")
     void create_ExceptionByBlank() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Name.create(" "))
+        assertThatIllegalArgumentException().isThrownBy(() -> Name.from(" "))
                 .withMessage("공백으로 이름을 생성할 수 없습니다.");
     }
 
     @Test
     @DisplayName("이름 값을 반환한다.")
     void value() {
-        Name name = Name.create("Brandon");
+        Name name = Name.from("Brandon");
         String actual = name.value();
         String expected = "Brandon";
         assertThat(actual).isEqualTo(expected);
