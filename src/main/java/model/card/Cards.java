@@ -39,11 +39,15 @@ public class Cards {
         return sumOfCardValues.value() > 21;
     }
 
-    public boolean hasHigherSumOfCardValuesThan(final Cards cards) {
-        if (this.sumOfCardValues.value() > 21) {
-            return false;
+    public boolean hasHigherSumOfCardValuesThan(final Cards anotherCards) {
+        if (anotherCards.isHigherThan21()) {
+            return true;
         }
-        return this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
+        return this.sumOfCardValues.value() >= anotherCards.sumOfCardValues.value();
+    }
+
+    public boolean hasSameSum(final Cards anotherCards) {
+        return this.sumOfCardValues.value() == anotherCards.sumOfCardValues.value();
     }
 
     public boolean hasSumOf21ComposedWithTwoCard() {

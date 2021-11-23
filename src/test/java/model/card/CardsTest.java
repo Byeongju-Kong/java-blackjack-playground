@@ -104,6 +104,15 @@ class CardsTest {
     }
 
     @Test
+    @DisplayName("카드를 받아 자신의 카드와 합이 같은지 반환한다.")
+    void hasSameSumOfCardValues() {
+        Cards cards = Cards.from(initialCards);
+        Cards anotherCards = Cards.from(Arrays.asList(Card.of(6, 3), Card.of(7, 2)));
+        boolean actual = cards.hasSameSum(anotherCards);
+        assertThat(actual).isTrue();
+    }
+
+    @Test
     @DisplayName("Cards 객체를 받아 자신의 카드합 보다 작은지 반환한다.")
     void hasHigherSumOfCardValuesThan() {
         Cards firstCards =
