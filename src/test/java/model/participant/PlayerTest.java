@@ -78,8 +78,7 @@ class PlayerTest {
     @MethodSource("provideDealerCardsAndExpectedProfit")
     void getProfit(final Cards dealerCards, double expectedProfit) {
         player.stay();
-        player.checkFinalResult(dealerCards);
-        double actualProfit = player.getProfit();
+        double actualProfit = player.getProfitAgainst(dealerCards);
         assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 

@@ -9,7 +9,7 @@ import model.state.running.Hit;
 
 import java.util.Objects;
 
-public class Player extends Participant{
+public class Player extends Participant {
     private final Name name;
     private final BettingMoney bettingMoney;
 
@@ -40,16 +40,17 @@ public class Player extends Participant{
         state = state.stay();
     }
 
-    public void checkFinalResult(Cards dealerCards) {
+    public double getProfitAgainst(final Cards dealerCards) {
+        checkResultAgainst(dealerCards);
+        return state.profit(bettingMoney.value());
+    }
+
+    private void checkResultAgainst(final Cards dealerCards) {
         if (state.getClass().equals(Stay.class) && getCards().hasHigherSumOfCardValuesThan(dealerCards)) {
             state = state.win();
         } else if (state.getClass().equals(Stay.class) && !getCards().hasHigherSumOfCardValuesThan(dealerCards)) {
             state = state.lose();
         }
-    }
-
-    public double getProfit() {
-        return state.profit(bettingMoney.value());
     }
 
     @Override
