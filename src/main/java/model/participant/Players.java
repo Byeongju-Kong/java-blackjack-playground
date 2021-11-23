@@ -23,7 +23,7 @@ public class Players {
 
     public boolean canGiveNewCardTo(final String name) {
         return values.stream()
-                .filter(participant -> participant.hasName(name))
+                .filter(player -> player.hasName(name))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(PLAYER_NOT_FOUNDED_EXCEPTION_MESSAGE))
                 .canDrawCards();
@@ -31,13 +31,13 @@ public class Players {
 
     public void giveNewCardTo(final String name, final Card newCard) {
         values.stream()
-                .filter(participant -> participant.hasName(name))
-                .forEach(participant -> participant.draw(newCard));
+                .filter(player -> player.hasName(name))
+                .forEach(player -> player.draw(newCard));
     }
 
     public Cards getCardsOf(final String name) {
         return values.stream()
-                .filter(participant -> participant.hasName(name))
+                .filter(player -> player.hasName(name))
                 .findAny()
                 .map(Player::getCards)
                 .orElseThrow(() -> new IllegalArgumentException(PLAYER_NOT_FOUNDED_EXCEPTION_MESSAGE));
@@ -45,7 +45,7 @@ public class Players {
 
     public void stay(final String name) {
         values.stream()
-                .filter(participant -> participant.hasName(name))
+                .filter(player -> player.hasName(name))
                 .forEach(Player::stay);
     }
 
