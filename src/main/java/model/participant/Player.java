@@ -4,7 +4,6 @@ import model.card.Cards;
 import model.participant.vo.BettingMoney;
 import model.participant.vo.Name;
 import model.state.finished.BlackJack;
-import model.state.finished.Stay;
 import model.state.running.Hit;
 
 import java.util.Objects;
@@ -41,16 +40,7 @@ public class Player extends Participant {
     }
 
     public double getProfitAgainst(final Cards dealerCards) {
-        checkResultAgainst(dealerCards);
-        return state.profit(bettingMoney.value());
-    }
-
-    private void checkResultAgainst(final Cards dealerCards) {
-        if (state.getClass().equals(Stay.class) && getCards().hasHigherSumOfCardValuesThan(dealerCards)) {
-            state = state.win();
-        } else if (state.getClass().equals(Stay.class) && !getCards().hasHigherSumOfCardValuesThan(dealerCards)) {
-            state = state.lose();
-        }
+        return state.profit(bettingMoney.value(), dealerCards);
     }
 
     @Override

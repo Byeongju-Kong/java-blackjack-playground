@@ -91,8 +91,28 @@ class PlayerTest {
         );
     }
 
-    private Cards anotherCards = Cards.from(
+    private final Cards anotherCards = Cards.from(
             Arrays.asList(Card.of(1, 3), Card.of(7, 3)));
+
+    @ParameterizedTest
+    @DisplayName("stay 상태에서, 딜러의 카드를 받아 자신의 카드와 비교 후, 수익을 반환한다.")
+    @MethodSource("provideCardsAndExpectedProfit")
+    void getProfitAgainst(final Cards cards, final double expectedProfit) {
+        Player player = Player.of("Chris", 10000, cards);
+        Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 3)));
+        player.stay();
+        double actualProfit = player.getProfitAgainst(dealerCards);
+        assertThat(actualProfit).isEqualTo(expectedProfit);
+    }
+
+    private static Stream<Arguments> provideCardsAndExpectedProfit() {
+        return Stream.of(
+                Arguments.of(Cards.from(Arrays.asList(Card.of(6, 4), Card.of(10, 2))),
+                        -10000.0),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(8, 4), Card.of(10, 2))),
+                        10000.0)
+        );
+    }
 
     @ParameterizedTest
     @DisplayName("이름을 기준으로 같은 객체인지 반환한다.")
