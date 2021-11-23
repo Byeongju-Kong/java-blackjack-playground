@@ -1,7 +1,6 @@
 package model.state.finished;
 
 import model.card.Cards;
-import model.state.State;
 
 public class Stay extends Finished {
     public Stay(Cards cards) {
@@ -9,15 +8,14 @@ public class Stay extends Finished {
     }
 
     @Override
-    public double earningRate() {
-        return 0.0;
-    }
-
-    public State win() {
-        return new Win(cards);
-    }
-
-    public State lose() {
-        return new Lose(cards);
+    public double profit(final int bettingMoney, final Cards dealerCards) {
+        if (dealerCards.hasSumOf21ComposedWithTwoCard()) {
+            return bettingMoney * -1.0;
+        } else if (cards.hasSameSum(dealerCards)) {
+            return 0.0;
+        } else if (cards.hasHigherSumOfCardValuesThan(dealerCards)) {
+            return bettingMoney;
+        }
+        return bettingMoney * -1.0;
     }
 }

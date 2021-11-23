@@ -12,9 +12,5 @@ public interface State {
 
     Cards cards();
 
-    int profit(final int bettingMoney);
-
-    State win();
-
-    State lose();
+    double profit(final int bettingMoney, final Cards dealerCards);
 }

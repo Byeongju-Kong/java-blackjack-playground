@@ -64,25 +64,10 @@ class HitTest {
     }
 
     @Test
-    @DisplayName("베팅 금액을 받아 수익을 반환한다.")
+    @DisplayName("Hit 상태에서 profit 메소드를 호출하면 예외를 발생시킨다.")
     void profit() {
-        int bettingMoney = 10000;
-        int actual = state.profit(bettingMoney);
-        int expected = 0;
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("Hit 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
-    void win_Exception() {
-        assertThatIllegalArgumentException().isThrownBy(state::win)
-                .withMessage("아직 stay 상태가 아니라 승패를 가를 수 없습니다.");
-    }
-
-    @Test
-    @DisplayName("Hit 상태에서 win 함수를 호출하면 예외를 발생시킨다.")
-    void lose_Exception() {
-        assertThatIllegalArgumentException().isThrownBy(state::lose)
-                .withMessage("아직 stay 상태가 아니라 승패를 가를 수 없습니다.");
+        Cards dealerCards = Cards.from(Arrays.asList(Card.of(1, 1), Card.of(2, 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> state.profit(10000, dealerCards))
+                .withMessage("아직 Hit 상태라 수익을 알 수 없습니다.");
     }
 }

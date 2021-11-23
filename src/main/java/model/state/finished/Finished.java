@@ -24,11 +24,4 @@ public abstract class Finished extends Created {
     public boolean isFinished() {
         return true;
     }
-
-    @Override
-    public int profit(int money) {
-        return (int) (money * earningRate());
-    }
-
-    abstract double earningRate();
 }

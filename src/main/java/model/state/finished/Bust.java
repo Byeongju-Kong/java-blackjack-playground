@@ -1,7 +1,6 @@
 package model.state.finished;
 
 import model.card.Cards;
-import model.state.State;
 
 public class Bust extends Finished {
     public Bust(Cards cards) {
@@ -9,17 +8,10 @@ public class Bust extends Finished {
     }
 
     @Override
-    double earningRate() {
-        return -1.0;
-    }
-
-    @Override
-    public State win() {
-        throw new IllegalArgumentException("BUST 상태는, 필패입니다.");
-    }
-
-    @Override
-    public State lose() {
-        throw new IllegalArgumentException("BUST 상태는, 필패입니다.");
+    public double profit(final int bettingMoney, final Cards dealerCards) {
+        if(dealerCards.isHigherThan21()) {
+            return 0.0;
+        }
+        return bettingMoney * -1.0;
     }
 }
