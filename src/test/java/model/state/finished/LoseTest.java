@@ -2,7 +2,6 @@ package model.state.finished;
 
 import model.card.Cards;
 import model.card.vo.Card;
-import model.state.State;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
