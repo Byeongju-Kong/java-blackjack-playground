@@ -14,13 +14,9 @@ public class CardDeck {
     private final List<Card> providedCards;
     private final Random random;
 
-    CardDeck() {
+    public CardDeck() {
         providedCards = new ArrayList<>();
         random = new Random();
-    }
-
-    public static CardDeck shuffle() {
-        return new CardDeck();
     }
 
     public Cards provideInitialCards() {
