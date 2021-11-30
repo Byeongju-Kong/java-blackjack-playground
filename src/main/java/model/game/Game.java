@@ -2,68 +2,58 @@ package model.game;
 
 import model.card.CardDeck;
 import model.card.Cards;
-import model.card.vo.Card;
 import model.participant.Dealer;
-import model.participant.Participant;
-import model.participant.vo.Name;
+import model.participant.Players;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 public class Game {
-    private final List<Participant> participants;
-    private final CardDeck cardDeck = CardDeck.shuffle();
+    private final Players players;
+    private final Dealer dealer;
+    private final CardDeck cardDeck;
 
-    public Game(final List<String> names) {
-        participants = participate(names);
-    }
-
-    List<Participant> participate(final List<String> names) {
-        List<Participant> participants = new ArrayList<>();
-        names.forEach(name -> participants.add(Participant.participate(name, cardDeck.provideInitialCards())));
-        participants.add(Dealer.participate(cardDeck.provideInitialCards()));
-        return participants;
+    public Game(final Map<String, Integer> namesAndBettingMoneys, final CardDeck cardDeck) {
+        this.cardDeck = cardDeck;
+        List<Cards> initialPlayerCars = new ArrayList<>();
+        IntStream.range(0, namesAndBettingMoneys.size())
+                .forEach(index -> initialPlayerCars.add(cardDeck.provideInitialCards()));
+        players = Players.of(namesAndBettingMoneys, initialPlayerCars);
+        dealer = Dealer.from(cardDeck.provideInitialCards());
     }
 
     public boolean canGiveNewCardTo(final String name) {
-        return participants.stream()
-                .filter(participant -> participant.hasName(name))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."))
-                .canDrawCards();
+        if (isDealer(name)) {
+            return dealer.canDrawCards();
+        }
+        return players.canGiveNewCardTo(name);
     }
 
     public void giveNewCardTo(final String name) {
-        participants.stream()
-                .filter(participant -> participant.hasName(name))
-                .forEach(participant -> participant.draw(provideNewCard()));
-    }
-
-    Card provideNewCard() {
-        return cardDeck.provideNewCard();
+        if (isDealer(name)) {
+            dealer.draw(cardDeck.provideNewCard());
+        }
+        players.giveNewCardTo(name, cardDeck.provideNewCard());
     }
 
     public Cards getCardsOf(final String name) {
-        return participants.stream()
-                .filter(participant -> participant.hasName(name))
-                .findAny()
-                .map(Participant::getCards)
-                .orElseThrow(() -> new IllegalArgumentException("이름에 맞는 참가자가 없습니다."));
+        if (name.equals("Dealer")) {
+            return dealer.getCards();
+        }
+        return players.getCardsOf(name);
+    }
+
+    private boolean isDealer(final String name) {
+        return name.equals("Dealer");
     }
 
     public void stay(final String name) {
-        participants.stream().filter(participant -> participant.hasName(name)).forEach(Participant::stay);
+        players.stay(name);
     }
 
-    public List<Name> getWinner() {
-        WinnerFinder winnerFinder = WinnerFinder.create(participants);
-        return winnerFinder.getWinner();
-    }
-
-    public boolean checkDealerHasCardsLowerThan16() {
-        Dealer dealer = (Dealer) participants.stream().filter(Dealer.class::isInstance)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("딜러가 참가하지 않았습니다."));
-        return dealer.hasCardsLowerThan16();
+    public double getProfitOf(final String name) {
+        return players.getProfitOf(name, dealer.getCards());
     }
 }
