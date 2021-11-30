@@ -49,7 +49,6 @@ public class BlackJackController {
         outputView.alertNewCardOfDealer(game.canGiveNewCardTo(REFERENCE_VALUE_OF_DEALER));
     }
 
-
     private void playTurnOf(final String name) {
         while (game.canGiveNewCardTo(name) && inputView.inputDrawingNewCard(name) == 'y') {
             game.giveNewCardTo(name);
