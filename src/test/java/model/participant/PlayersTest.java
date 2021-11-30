@@ -29,7 +29,7 @@ class PlayersTest {
     private final Cards cardsOfBrandon = Cards.from(new ArrayList<>(
             Arrays.asList(Card.of(3, 1), Card.of(11, 2))));
     private final Cards cardsOfHenry = Cards.from(
-            Arrays.asList(Card.of(12, 1), Card.of(7, 4)));
+            Arrays.asList(Card.of(12, 1), Card.of(8, 4)));
     private final List<Cards> initialCards = new ArrayList<>(Arrays.asList(cardsOfChris, cardsOfBrandon, cardsOfHenry));
     private final Players players = Players.of(namesAndMoneys, initialCards);
 
@@ -59,12 +59,14 @@ class PlayersTest {
         assertThat(players.canGiveNewCardTo("Brandon")).isFalse();
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("딜러 카드를 받아 승패를 확인하고 최종 수익을 반환한다.")
-    void getProfitAgainst() {
+    @CsvSource({"Chris, 30000.0", "Brandon, -30000.0", "Henry, 10000.0"})
+    void getProfitAgainst(final String name, final double expected) {
         Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 4)));
-        double actualProfit = players.getProfitOf("Chris", dealerCards);
-        double expectedProfit = 30000.0;
-        assertThat(actualProfit).isEqualTo(expectedProfit);
+        players.stay("Brandon");
+        players.stay("Henry");
+        double actual = players.getProfitOf(name, dealerCards);
+        assertThat(actual).isEqualTo(expected);
     }
 }
