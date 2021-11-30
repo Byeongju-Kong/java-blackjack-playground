@@ -1,69 +1,71 @@
 package controller;
 
-import model.betting.BasicMoneyDistribution;
-import model.betting.BettingMoney;
-import model.betting.FirstBlackJackMoneyDistribution;
-import model.betting.MoneyDistribution;
+import model.card.CardDeck;
 import model.game.Game;
-import model.participant.vo.Name;
 import view.InputView;
 import view.OutputView;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BlackJackController {
+    private static final String REFERENCE_VALUE_OF_DEALER = "Dealer";
     private final Game game;
-    private MoneyDistribution moneyDistribution;
     private final InputView inputView;
     private final OutputView outputView;
     private final List<String> participantNames;
-    private final Map<String, BettingMoney> bettingMoneysOfParticipants = new HashMap<>();
 
     public BlackJackController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
         participantNames = Arrays.asList(inputView.inputPlayerNames());
-        inputBettingMoneys();
-        moneyDistribution = FirstBlackJackMoneyDistribution.create(bettingMoneysOfParticipants);
-        game = new Game(participantNames);
+        game = setForGame();
+    }
+
+    private Game setForGame() {
+        CardDeck cardDeck = new CardDeck();
+        Map<String, Integer> namesAndBettingMoney = new LinkedHashMap<>();
+        participantNames.forEach(name -> namesAndBettingMoney.put(name, inputView.inputBettingMoneyOf(name)));
+        outputView.showGameStart(participantNames);
+        return new Game(namesAndBettingMoney, cardDeck);
     }
 
     public void run() {
-        outputView.showGameStart(participantNames);
+        showInitialCards();
+        playGame();
+        showResult();
+        showProfits();
+    }
+
+    private void showInitialCards() {
+        outputView.showOneOfInitialCardsOf("딜러", game.getCardsOf(REFERENCE_VALUE_OF_DEALER).getCards().get(0));
         participantNames.forEach(name -> outputView.showCardsOf(name, game.getCardsOf(name)));
-        List<Name> winnerNames = playGamesAndGetWinners();
-        participantNames.forEach(name -> outputView.showFinalResultOf(name, game.getCardsOf(name)));
-        outputView.showFinalResultOf("Dealer", game.getCardsOf("Dealer"));
-        outputView.showFinalMoney(moneyDistribution.getDistributedMoneyOfGameThatWinnerIs(winnerNames));
     }
 
-    private void inputBettingMoneys() {
-        participantNames
-                .forEach(name -> bettingMoneysOfParticipants.put(name, BettingMoney.create(inputView.inputBettingMoneyOf(name))));
-    }
-
-    private List<Name> playGamesAndGetWinners() {
-        if (checkFirstCardsBlackJack()) {
-            return game.getWinner();
-        }
-        moneyDistribution = BasicMoneyDistribution.create(bettingMoneysOfParticipants);
+    private void playGame() {
         participantNames.forEach(this::playTurnOf);
-        outputView.alertNewCardOfDealer(game.checkDealerHasCardsLowerThan16());
-        return game.getWinner();
+        outputView.alertNewCardOfDealer(game.canGiveNewCardTo(REFERENCE_VALUE_OF_DEALER));
     }
 
-    private boolean checkFirstCardsBlackJack() {
-        return participantNames.stream()
-                .anyMatch(name -> !game.canGiveNewCardTo(name));
-    }
 
     private void playTurnOf(final String name) {
         while (game.canGiveNewCardTo(name) && inputView.inputDrawingNewCard(name) == 'y') {
             game.giveNewCardTo(name);
             outputView.showCardsOf(name, game.getCardsOf(name));
         }
+        if (game.canGiveNewCardTo(name)) {
+            game.stay(name);
+        }
+    }
+
+    private void showResult() {
+        outputView.showFinalResultOf("딜러", game.getCardsOf(REFERENCE_VALUE_OF_DEALER));
+        participantNames.forEach(name -> outputView.showFinalResultOf(name, game.getCardsOf(name)));
+    }
+
+    private void showProfits() {
+        outputView.showFinalMoney(game.getProfits());
     }
 }
