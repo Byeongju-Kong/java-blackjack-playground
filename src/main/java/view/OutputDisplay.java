@@ -1,6 +1,7 @@
 package view;
 
 import model.card.Cards;
+import model.card.vo.Card;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,11 @@ public class OutputDisplay implements OutputView {
         message.deleteCharAt(message.lastIndexOf(DELIMITER));
         message.append("에게 두 장의 카드를 나누었습니다.");
         System.out.println(message);
+    }
+
+    @Override
+    public void showOneOfInitialCardsOf(final String name, final Card card) {
+        System.out.println(name + ": " + card);
     }
 
     @Override
