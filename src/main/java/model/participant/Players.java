@@ -56,4 +56,10 @@ public class Players {
                 .orElseThrow(() -> new IllegalArgumentException(PLAYER_NOT_FOUNDED_EXCEPTION_MESSAGE))
                 .getProfitAgainst(dealerCards);
     }
+
+    public double getSumOfPlayersProfit(final Cards dealerCards) {
+        return values.stream()
+                .mapToDouble(player -> player.getProfitAgainst(dealerCards))
+                .sum();
+    }
 }

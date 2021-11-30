@@ -69,4 +69,15 @@ class PlayersTest {
         double actual = players.getProfitOf(name, dealerCards);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("플레이어들의 수익 총합을 반환한다.")
+    void getSumOfPlayersProfit() {
+        Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 4)));
+        players.stay("Brandon");
+        players.stay("Henry");
+        double actual = players.getSumOfPlayersProfit(dealerCards);
+        double expected = 10000.0;
+        assertThat(actual).isEqualTo(expected);
+    }
 }
