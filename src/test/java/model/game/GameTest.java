@@ -76,7 +76,7 @@ class GameTest {
 
     @ParameterizedTest
     @DisplayName("수익을 반환한다.")
-    @CsvSource({"Chris, 30000.0", "Brandon, -30000.0", "Henry, 10000"})
+    @CsvSource({"Chris, 30000.0", "Brandon, -30000.0", "Henry, 10000.0", "Dealer, -10000.0"})
     void getProfitOf(final String name, final double expectedProfit) {
         game.giveNewCardTo("Brandon");
         game.giveNewCardTo("Henry");

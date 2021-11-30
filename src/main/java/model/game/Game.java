@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class Game {
+    private static final int MULTIPLICATION_OF_DEALER_PROFIT = -1;
     private final Players players;
     private final Dealer dealer;
     private final CardDeck cardDeck;
@@ -54,6 +55,9 @@ public class Game {
     }
 
     public double getProfitOf(final String name) {
+        if (isDealer(name)) {
+            return players.getSumOfPlayersProfit(dealer.getCards()) * MULTIPLICATION_OF_DEALER_PROFIT;
+        }
         return players.getProfitOf(name, dealer.getCards());
     }
 }
