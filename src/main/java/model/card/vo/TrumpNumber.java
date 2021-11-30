@@ -3,15 +3,16 @@ package model.card.vo;
 import java.util.Arrays;
 
 public enum TrumpNumber {
-    A(1, 1), TWO(2, 2), THREE(3, 3), FOUR(4, 4), FIVE(5, 5),
-    SIX(6, 6), SEVEN(7, 7), EIGHT(8, 8), NINE(9, 9),
-    J(10, 10), Q(11, 10), K(12, 10);
-    private final int numberIndex;
-    private final int value;
+    A(1, "A"), TWO(2, "2"), THREE(3, "3"), FOUR(4, "4"),
+    FIVE(5, "5"), SIX(6, "6"), SEVEN(7, "7"), EIGHT(8, "8"),
+    NINE(9, "9"), J(10, "J"), Q(11, "Q"), K(12, "K");
 
-    TrumpNumber(final int numberIndex, final int value) {
+    private final int numberIndex;
+    private final String symbol;
+
+    TrumpNumber(final int numberIndex, final String symbol) {
         this.numberIndex = numberIndex;
-        this.value = value;
+        this.symbol = symbol;
     }
 
     public static TrumpNumber from(final int numberIndex) {
@@ -30,6 +31,11 @@ public enum TrumpNumber {
     }
 
     public int value() {
-        return value;
+        return Math.min(numberIndex, 10);
+    }
+
+    @Override
+    public String toString() {
+        return symbol;
     }
 }
