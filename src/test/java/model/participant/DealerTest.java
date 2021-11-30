@@ -14,21 +14,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
     @ParameterizedTest
-    @DisplayName("카드의 합이 16 이하인지 반환한다.")
+    @DisplayName("딜러가 추가적인 한 장의 카드를 받을 수 있는지 반환한다.")
     @MethodSource("provideCardsAndLowerThan16")
     void hasCardsLowerThan16(Cards initialCards, boolean expected) {
-        Dealer dealer = Dealer.participate(initialCards);
-        boolean actual = dealer.hasCardsLowerThan16();
+        Dealer dealer = Dealer.from(initialCards);
+        boolean actual = dealer.canDrawCards();
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideCardsAndLowerThan16() {
         return Stream.of(
-                Arguments.of(Cards.generate(
-                        Arrays.asList(Card.generate(8, 1), Card.generate(7, 1))),
+                Arguments.of(Cards.from(
+                        Arrays.asList(Card.of(8, 1), Card.of(7, 1))),
                         true),
-                Arguments.of(Cards.generate(
-                        Arrays.asList(Card.generate(8, 1), Card.generate(9, 1))),
+                Arguments.of(Cards.from(
+                        Arrays.asList(Card.of(8, 1), Card.of(9, 1))),
                         false)
         );
     }

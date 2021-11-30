@@ -17,7 +17,7 @@ class SumTest {
     @DisplayName("카드들을 받아 카드의 합을 반환한다.")
     @MethodSource("provideCardsAndSumOfCards")
     void value(List<Card> cards, int expectedSum) {
-        Sum sum = Sum.create(cards);
+        Sum sum = Sum.from(cards);
         int actualSum = sum.value();
         assertThat(actualSum).isEqualTo(expectedSum);
     }
@@ -25,18 +25,18 @@ class SumTest {
     private static Stream<Arguments> provideCardsAndSumOfCards() {
         return Stream.of(
                 Arguments.of(
-                        Arrays.asList(Card.generate(1, 1), Card.generate(11, 1)),
+                        Arrays.asList(Card.of(1, 1), Card.of(11, 1)),
                         21),
                 Arguments.of(
-                        Arrays.asList(Card.generate(1, 1), Card.generate(12, 1),
-                                Card.generate(4, 3)),
+                        Arrays.asList(Card.of(1, 1), Card.of(12, 1),
+                                Card.of(4, 3)),
                         15),
                 Arguments.of(
-                        Arrays.asList(Card.generate(1, 1), Card.generate(8, 1)),
+                        Arrays.asList(Card.of(1, 1), Card.of(8, 1)),
                         19),
                 Arguments.of(
-                        Arrays.asList(Card.generate(11, 1), Card.generate(12, 1),
-                                Card.generate(4, 3)),
+                        Arrays.asList(Card.of(11, 1), Card.of(12, 1),
+                                Card.of(4, 3)),
                         24)
         );
     }

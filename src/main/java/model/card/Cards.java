@@ -9,13 +9,13 @@ public class Cards {
     private final List<Card> values;
     private Sum sumOfCardValues;
 
-    public static Cards generate(List<Card> initialCards) {
+    public static Cards from(List<Card> initialCards) {
         return new Cards(initialCards);
     }
 
     private Cards(List<Card> initialCards) {
         values = initialCards;
-        sumOfCardValues = Sum.create(initialCards);
+        sumOfCardValues = Sum.from(initialCards);
     }
 
     public List<Card> getCards() {
@@ -24,7 +24,7 @@ public class Cards {
 
     public void add(Card newCard) {
         values.add(newCard);
-        sumOfCardValues = Sum.create(values);
+        sumOfCardValues = Sum.from(values);
     }
 
     public int getSumOfCardValues() {
@@ -39,11 +39,15 @@ public class Cards {
         return sumOfCardValues.value() > 21;
     }
 
-    public boolean hasHigherSumOfCardValuesThan(final Cards cards) {
-        if (this.sumOfCardValues.value() > 21) {
-            return false;
+    public boolean hasHigherSumOfCardValuesThan(final Cards anotherCards) {
+        if (anotherCards.isHigherThan21()) {
+            return true;
         }
-        return this.sumOfCardValues.value() >= cards.sumOfCardValues.value();
+        return this.sumOfCardValues.value() >= anotherCards.sumOfCardValues.value();
+    }
+
+    public boolean hasSameSum(final Cards anotherCards) {
+        return this.sumOfCardValues.value() == anotherCards.sumOfCardValues.value();
     }
 
     public boolean hasSumOf21ComposedWithTwoCard() {

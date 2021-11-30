@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Name {
     private final String value;
 
-    public static Name create(final String name) {
+    public static Name from(final String name) {
         return new Name(name);
     }
 
     private Name(final String name) {
-        if(name.isBlank()) {
+        if(name.isEmpty() || name.contains(" ")) {
             throw new IllegalArgumentException("공백으로 이름을 생성할 수 없습니다.");
         }
         this.value = name;

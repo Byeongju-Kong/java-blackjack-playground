@@ -14,33 +14,29 @@ public class CardDeck {
     private final List<Card> providedCards;
     private final Random random;
 
-    CardDeck() {
+    public CardDeck() {
         providedCards = new ArrayList<>();
         random = new Random();
     }
 
-    public static CardDeck shuffle() {
-        return new CardDeck();
-    }
-
     public Cards provideInitialCards() {
-        return Cards.generate(new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard())));
+        return Cards.from(new ArrayList<>(Arrays.asList(provideNewCard(), provideNewCard())));
     }
 
     public Card provideNewCard() {
         Card newCard;
         do {
-            newCard = Card.generate(generateRandomIndex(KIND_OF_NUMBER), generateRandomIndex(KIND_OF_SHAPE));
+            newCard = Card.of(generateRandomIndex(KIND_OF_NUMBER), generateRandomIndex(KIND_OF_SHAPE));
         } while (isProvidedAlready(newCard));
         providedCards.add(newCard);
         return newCard;
     }
 
-    protected int generateRandomIndex(final int boundary) {
+    int generateRandomIndex(final int boundary) {
         return random.nextInt(boundary) + DEFAULT_ADD_OF_INDEX;
     }
 
-    protected boolean isProvidedAlready(final Card newCard) {
+    boolean isProvidedAlready(final Card newCard) {
         return providedCards.contains(newCard);
     }
 }

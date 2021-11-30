@@ -16,7 +16,7 @@ class CardTest {
     @MethodSource("provideNumberIndexAndTrumpNumber")
     void getNumber(int numberIndex, TrumpNumber expectedTrumpNumber) {
         int shapeIndex = 1;
-        Card card = Card.generate(numberIndex, shapeIndex);
+        Card card = Card.of(numberIndex, shapeIndex);
         TrumpNumber actualTrumpNumber = card.getNumber();
         assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber);
     }
@@ -41,7 +41,7 @@ class CardTest {
     @Test
     @DisplayName("카드의 정보를 문자열에 담아 반환한다.")
     void toString_provideCardInfo() {
-        Card card = Card.generate(1, 1);
+        Card card = Card.of(1, 1);
         String actual = card.toString();
         String expected = "A스페이드";
         assertThat(actual).isEqualTo(expected);
@@ -52,7 +52,7 @@ class CardTest {
     @MethodSource("provideNumberIndexAndIsA")
     void isA(int numberIndex, boolean expected) {
         int anyShapeIndex = 1;
-        Card card = Card.generate(numberIndex, anyShapeIndex);
+        Card card = Card.of(numberIndex, anyShapeIndex);
         boolean actual = card.isA();
         assertThat(actual).isEqualTo(expected);
     }

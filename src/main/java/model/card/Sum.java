@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Sum {
     private final int value;
 
-    public static Sum create(final List<Card> cards) {
+    public static Sum from(final List<Card> cards) {
         return new Sum(cards);
     }
 
