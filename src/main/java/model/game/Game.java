@@ -6,6 +6,7 @@ import model.participant.Dealer;
 import model.participant.Players;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -15,6 +16,7 @@ public class Game {
     private final Players players;
     private final Dealer dealer;
     private final CardDeck cardDeck;
+    private final List<String> playerNames;
 
     public Game(final Map<String, Integer> namesAndBettingMoneys, final CardDeck cardDeck) {
         this.cardDeck = cardDeck;
@@ -23,6 +25,7 @@ public class Game {
                 .forEach(index -> initialPlayerCars.add(cardDeck.provideInitialCards()));
         players = Players.of(namesAndBettingMoneys, initialPlayerCars);
         dealer = Dealer.from(cardDeck.provideInitialCards());
+        playerNames = new ArrayList<>(namesAndBettingMoneys.keySet());
     }
 
     public boolean canGiveNewCardTo(final String name) {
@@ -54,10 +57,10 @@ public class Game {
         players.stay(name);
     }
 
-    public double getProfitOf(final String name) {
-        if (isDealer(name)) {
-            return players.getSumOfPlayersProfit(dealer.getCards()) * MULTIPLICATION_OF_DEALER_PROFIT;
-        }
-        return players.getProfitOf(name, dealer.getCards());
+    public Map<String, Integer> getProfits() {
+        Map<String, Integer> profits = new LinkedHashMap<>();
+        playerNames.forEach(name -> profits.put(name, players.getProfitOf(name, dealer.getCards())));
+        profits.put("딜러", players.getSumOfPlayersProfit(dealer.getCards()) * MULTIPLICATION_OF_DEALER_PROFIT);
+        return profits;
     }
 }

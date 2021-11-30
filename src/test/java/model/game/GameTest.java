@@ -75,13 +75,13 @@ class GameTest {
     }
 
     @ParameterizedTest
-    @DisplayName("수익을 반환한다.")
-    @CsvSource({"Chris, 30000", "Brandon, -30000", "Henry, 10000", "Dealer, -10000"})
+    @DisplayName("이름과 수익의 쌍을 반환한다.")
+    @CsvSource({"Chris, 30000", "Brandon, -30000", "Henry, 10000", "딜러, -10000"})
     void getProfitOf(final String name, final int expectedProfit) {
         game.giveNewCardTo("Brandon");
         game.giveNewCardTo("Henry");
         game.stay("Henry");
-        double actualProfit = game.getProfitOf(name);
+        int actualProfit = game.getProfits().get(name);
         assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 }
