@@ -43,7 +43,7 @@ public class Game {
     }
 
     public Cards getCardsOf(final String name) {
-        if (name.equals("Dealer")) {
+        if (isDealer(name)) {
             return dealer.getCards();
         }
         return players.getCardsOf(name);
