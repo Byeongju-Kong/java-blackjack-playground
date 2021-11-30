@@ -32,11 +32,11 @@ public class CardDeck {
         return newCard;
     }
 
-    protected int generateRandomIndex(final int boundary) {
+    int generateRandomIndex(final int boundary) {
         return random.nextInt(boundary) + DEFAULT_ADD_OF_INDEX;
     }
 
-    protected boolean isProvidedAlready(final Card newCard) {
+    boolean isProvidedAlready(final Card newCard) {
         return providedCards.contains(newCard);
     }
 }
