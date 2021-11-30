@@ -23,7 +23,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return number + shape.value();
+        return number.toString() + shape.value();
     }
 
     @Override
