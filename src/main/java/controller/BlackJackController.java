@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BlackJackController {
     private static final String REFERENCE_VALUE_OF_DEALER = "Dealer";
@@ -20,8 +21,14 @@ public class BlackJackController {
     public BlackJackController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        participantNames = Arrays.asList(inputView.inputPlayerNames());
+        participantNames = inputNames();
         game = setForGame();
+    }
+
+    private List<String> inputNames() {
+        return Arrays.stream(inputView.inputPlayerNames())
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     private Game setForGame() {
