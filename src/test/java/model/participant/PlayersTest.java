@@ -61,7 +61,7 @@ class PlayersTest {
 
     @ParameterizedTest
     @DisplayName("딜러 카드를 받아 승패를 확인하고 최종 수익을 반환한다.")
-    @CsvSource({"Chris, 30000.0", "Brandon, -30000.0", "Henry, 10000.0"})
+    @CsvSource({"Chris, 30000", "Brandon, -30000", "Henry, 10000"})
     void getProfitAgainst(final String name, final double expected) {
         Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 4)));
         players.stay("Brandon");
@@ -76,8 +76,8 @@ class PlayersTest {
         Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 4)));
         players.stay("Brandon");
         players.stay("Henry");
-        double actual = players.getSumOfPlayersProfit(dealerCards);
-        double expected = 10000.0;
+        int actual = players.getSumOfPlayersProfit(dealerCards);
+        int expected = 10000;
         assertThat(actual).isEqualTo(expected);
     }
 }

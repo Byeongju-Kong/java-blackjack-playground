@@ -76,7 +76,7 @@ class PlayerTest {
     @ParameterizedTest
     @DisplayName("수익을 반환한다.")
     @MethodSource("provideDealerCardsAndExpectedProfit")
-    void getProfit(final Cards dealerCards, double expectedProfit) {
+    void getProfit(final Cards dealerCards, int expectedProfit) {
         player.stay();
         double actualProfit = player.getProfitAgainst(dealerCards);
         assertThat(actualProfit).isEqualTo(expectedProfit);
@@ -85,9 +85,9 @@ class PlayerTest {
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(8, 1), Card.of(9, 4))), 10000.0),
+                        Card.of(8, 1), Card.of(9, 4))), 10000),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 1), Card.of(9, 4))), -10000.0)
+                        Card.of(10, 1), Card.of(9, 4))), -10000)
         );
     }
 
@@ -97,7 +97,7 @@ class PlayerTest {
     @ParameterizedTest
     @DisplayName("stay 상태에서, 딜러의 카드를 받아 자신의 카드와 비교 후, 수익을 반환한다.")
     @MethodSource("provideCardsAndExpectedProfit")
-    void getProfitAgainst(final Cards cards, final double expectedProfit) {
+    void getProfitAgainst(final Cards cards, final int expectedProfit) {
         Player player = Player.of("Chris", 10000, cards);
         Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 3)));
         player.stay();
@@ -108,9 +108,9 @@ class PlayerTest {
     private static Stream<Arguments> provideCardsAndExpectedProfit() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(Card.of(6, 4), Card.of(10, 2))),
-                        -10000.0),
+                        -10000),
                 Arguments.of(Cards.from(Arrays.asList(Card.of(8, 4), Card.of(10, 2))),
-                        10000.0)
+                        10000)
         );
     }
 

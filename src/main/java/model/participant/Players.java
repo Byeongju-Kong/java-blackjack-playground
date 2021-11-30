@@ -49,7 +49,7 @@ public class Players {
                 .forEach(Player::stay);
     }
 
-    public double getProfitOf(final String name, final Cards dealerCards) {
+    public int getProfitOf(final String name, final Cards dealerCards) {
         return values.stream()
                 .filter(player -> player.hasName(name))
                 .findAny()
@@ -57,9 +57,9 @@ public class Players {
                 .getProfitAgainst(dealerCards);
     }
 
-    public double getSumOfPlayersProfit(final Cards dealerCards) {
+    public int getSumOfPlayersProfit(final Cards dealerCards) {
         return values.stream()
-                .mapToDouble(player -> player.getProfitAgainst(dealerCards))
+                .mapToInt(player -> player.getProfitAgainst(dealerCards))
                 .sum();
     }
 }

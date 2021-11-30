@@ -45,7 +45,7 @@ class BlackJackTest {
     @ParameterizedTest
     @DisplayName("딜러카드가 블랙잭이면 0.0을 반환하고 아니라면 배팅금액의 1.5배를 반환한다.")
     @MethodSource("provideDealerCardsAndExpectedProfit")
-    void profit(final Cards dealerCards, final double expectedProfit) {
+    void profit(final Cards dealerCards, final int expectedProfit) {
         int bettingMoney = 10000;
         double actualProfit = state.profit(bettingMoney, dealerCards);
         assertThat(actualProfit).isEqualTo(expectedProfit);
@@ -53,8 +53,8 @@ class BlackJackTest {
 
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
-                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(1, 3))), 0.0),
-                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(2, 3))), 15000.0)
+                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(1, 3))), 0),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(2, 3))), 15000)
         );
     }
 }

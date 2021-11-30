@@ -8,14 +8,14 @@ public class Stay extends Finished {
     }
 
     @Override
-    public double profit(final int bettingMoney, final Cards dealerCards) {
+    public int profit(final int bettingMoney, final Cards dealerCards) {
         if (dealerCards.hasSumOf21ComposedWithTwoCard()) {
-            return bettingMoney * -1.0;
+            return bettingMoney * -1;
         } else if (cards.hasSameSum(dealerCards)) {
-            return 0.0;
+            return 0;
         } else if (cards.hasHigherSumOfCardValuesThan(dealerCards)) {
             return bettingMoney;
         }
-        return bettingMoney * -1.0;
+        return bettingMoney * -1;
     }
 }

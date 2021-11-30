@@ -8,10 +8,10 @@ public class BlackJack extends Finished {
     }
 
     @Override
-    public double profit(final int bettingMoney, final Cards dealerCards) {
-        if(dealerCards.hasSumOf21ComposedWithTwoCard()) {
-            return 0.0;
+    public int profit(final int bettingMoney, final Cards dealerCards) {
+        if (dealerCards.hasSumOf21ComposedWithTwoCard()) {
+            return 0;
         }
-        return bettingMoney * 1.5;
+        return (int) (bettingMoney * 1.5);
     }
 }

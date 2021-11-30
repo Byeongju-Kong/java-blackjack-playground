@@ -44,19 +44,19 @@ class BustTest {
     }
 
     @ParameterizedTest
-    @DisplayName("딜러카드가 Bust라면 0.0을 반환하고 아니라면 배팅금액의 -1.0배를 반환한다..")
+    @DisplayName("딜러카드가 Bust라면 0을 반환하고 아니라면 배팅금액의 -1배를 반환한다..")
     @MethodSource("provideDealerCardsAndExpectedProfit")
-    void profit(final Cards dealerCards, final double expectedProfit) {
+    void profit(final Cards dealerCards, final int expectedProfit) {
         int bettingMoney = 10000;
-        double actualProfit = state.profit(bettingMoney, dealerCards);
+        int actualProfit = state.profit(bettingMoney, dealerCards);
         assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(6, 3),
-                        Card.of(7, 2))), 0.0),
-                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(7, 3))), -10000.0)
+                        Card.of(7, 2))), 0),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(7, 3))), -10000)
         );
     }
 }

@@ -39,7 +39,7 @@ public class Player extends Participant {
         state = state.stay();
     }
 
-    public double getProfitAgainst(final Cards dealerCards) {
+    public int getProfitAgainst(final Cards dealerCards) {
         return state.profit(bettingMoney.value(), dealerCards);
     }
 
