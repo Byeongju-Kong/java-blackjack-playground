@@ -2,43 +2,29 @@ package model.card.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class TrumpNumberTest {
     @ParameterizedTest
-    @DisplayName("Index를 값으로 Index에 해당하는 객체를 반환받는다.")
-    @MethodSource("provideIndexAndTrumpNumber")
-    void findBy(int index, TrumpNumber expectedTrumpNumber, int expectedValue) {
+    @DisplayName("Index를 값으로 Index에 해당하는 객체를 반환한다.")
+    @CsvSource({"1, A", "2, TWO", "3, THREE", "4, FOUR", "5, FIVE", "6, SIX",
+            "7, SEVEN", "8, EIGHT", "9, NINE", "10, J", "11, Q", "12, K"})
+    void findBy(int index, TrumpNumber expectedTrumpNumber) {
         TrumpNumber actualTrumpNumber = TrumpNumber.from(index);
-        int actualValue = actualTrumpNumber.value();
-        assertAll(
-                () -> assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber),
-                () -> assertThat(actualValue).isEqualTo(expectedValue)
-        );
+        assertThat(actualTrumpNumber).isEqualTo(expectedTrumpNumber);
     }
 
-    private static Stream<Arguments> provideIndexAndTrumpNumber() {
-        return Stream.of(
-                Arguments.of(1, TrumpNumber.A, 1),
-                Arguments.of(2, TrumpNumber.TWO,2),
-                Arguments.of(3, TrumpNumber.THREE, 3),
-                Arguments.of(4, TrumpNumber.FOUR, 4),
-                Arguments.of(5, TrumpNumber.FIVE, 5),
-                Arguments.of(6, TrumpNumber.SIX, 6),
-                Arguments.of(7, TrumpNumber.SEVEN, 7),
-                Arguments.of(8, TrumpNumber.EIGHT, 8),
-                Arguments.of(9, TrumpNumber.NINE, 9),
-                Arguments.of(10, TrumpNumber.J, 10),
-                Arguments.of(11, TrumpNumber.Q, 10),
-                Arguments.of(12, TrumpNumber.K, 10)
-        );
+    @ParameterizedTest
+    @DisplayName("카드의 합에 사용되는 값을 반환한다.")
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12})
+    void value(int index) {
+        TrumpNumber trumpNumber = TrumpNumber.from(index);
+        int actualValue = trumpNumber.value();
+        int expectedValue = Math.min(index, 10);
+        assertThat(actualValue).isEqualTo(expectedValue);
     }
 
     @ParameterizedTest
