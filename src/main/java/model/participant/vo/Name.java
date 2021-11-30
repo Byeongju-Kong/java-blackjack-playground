@@ -10,7 +10,7 @@ public class Name {
     }
 
     private Name(final String name) {
-        if(name.isBlank()) {
+        if(name.isEmpty() || name.contains(" ")) {
             throw new IllegalArgumentException("공백으로 이름을 생성할 수 없습니다.");
         }
         this.value = name;
