@@ -64,7 +64,7 @@ public class BlackJackController {
             game.giveNewCardTo(name);
             outputView.showCardsOf(name, game.getCardsOf(name));
         }
-        if (game.canGiveNewCardTo(name)) {
+        if (!game.canGiveNewCardTo(name)) {
             game.stay(name);
         }
     }
