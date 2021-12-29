@@ -7,8 +7,4 @@ public enum TrumpShape {
     TrumpShape(final String value) {
         this.value = value;
     }
-
-    public String value() {
-        return value;
-    }
 }

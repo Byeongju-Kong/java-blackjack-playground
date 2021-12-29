@@ -1,14 +1,14 @@
 package model.card.vo;
 
 public enum TrumpNumber {
-    A("A"), TWO("2"), THREE("3"), FOUR("4"),
-    FIVE("5"), SIX("6"), SEVEN("7"), EIGHT("8"),
-    NINE("9"), J("J"), Q("Q"), K("K");
+    A(1), TWO(2), THREE(3), FOUR(4),
+    FIVE(5), SIX(6), SEVEN(7), EIGHT(8),
+    NINE(9), J(10), Q(10), K(10);
 
-    private final String symbol;
+    private final int value;
 
-    TrumpNumber(final String symbol) {
-        this.symbol = symbol;
+    TrumpNumber(final int value) {
+        this.value = value;
     }
 
     public boolean isA() {
@@ -20,14 +20,6 @@ public enum TrumpNumber {
     }
 
     public int value() {
-        if (this == J || this == Q || this == K) {
-            return 10;
-        }
-        return Integer.parseInt(symbol);
-    }
-
-    @Override
-    public String toString() {
-        return symbol;
+        return value;
     }
 }

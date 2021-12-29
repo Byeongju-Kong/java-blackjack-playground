@@ -1,6 +1,7 @@
 package model.card.vo;
 
 public class Card {
+    private static final String TO_STRING_DELIMITER = "-";
     private final TrumpNumber number;
     private final TrumpShape shape;
 
@@ -23,7 +24,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return number.toString() + shape.value();
+        return number.toString() + TO_STRING_DELIMITER + shape.toString();
     }
 
     @Override
