@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.HEART;
+import static model.card.vo.TrumpShape.SPADE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SumTest {
@@ -25,18 +28,18 @@ class SumTest {
     private static Stream<Arguments> provideCardsAndSumOfCards() {
         return Stream.of(
                 Arguments.of(
-                        Arrays.asList(Card.of(1, 1), Card.of(11, 1)),
+                        Arrays.asList(Card.of(A, SPADE), Card.of(Q, SPADE)),
                         21),
                 Arguments.of(
-                        Arrays.asList(Card.of(1, 1), Card.of(12, 1),
-                                Card.of(4, 3)),
+                        Arrays.asList(Card.of(A, SPADE), Card.of(K, SPADE),
+                                Card.of(FOUR, HEART)),
                         15),
                 Arguments.of(
-                        Arrays.asList(Card.of(1, 1), Card.of(8, 1)),
+                        Arrays.asList(Card.of(A, SPADE), Card.of(EIGHT, SPADE)),
                         19),
                 Arguments.of(
-                        Arrays.asList(Card.of(11, 1), Card.of(12, 1),
-                                Card.of(4, 3)),
+                        Arrays.asList(Card.of(Q, SPADE), Card.of(K, SPADE),
+                                Card.of(FOUR, HEART)),
                         24)
         );
     }

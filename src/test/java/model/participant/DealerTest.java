@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.SPADE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
@@ -25,10 +27,10 @@ class DealerTest {
     private static Stream<Arguments> provideCardsAndLowerThan16() {
         return Stream.of(
                 Arguments.of(Cards.from(
-                        Arrays.asList(Card.of(8, 1), Card.of(7, 1))),
+                        Arrays.asList(Card.of(EIGHT, SPADE), Card.of(SEVEN, SPADE))),
                         true),
                 Arguments.of(Cards.from(
-                        Arrays.asList(Card.of(8, 1), Card.of(9, 1))),
+                        Arrays.asList(Card.of(EIGHT, SPADE), Card.of(NINE, SPADE))),
                         false)
         );
     }

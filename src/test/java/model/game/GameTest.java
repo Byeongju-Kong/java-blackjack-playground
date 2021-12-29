@@ -10,18 +10,20 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GameTest {
     private final CardDeck cardDeck = new CardDeck() {
         final Cards cardsOfChris = Cards.from(
-                new ArrayList<>(Arrays.asList(Card.of(1, 1), Card.of(10, 2))));
+                new ArrayList<>(Arrays.asList(Card.of(A, SPADE), Card.of(J, DIAMOND))));
         final Cards cardsOfBrandon = Cards.from(
-                new ArrayList<>(Arrays.asList(Card.of(7, 1), Card.of(8, 2))));
+                new ArrayList<>(Arrays.asList(Card.of(SEVEN, SPADE), Card.of(EIGHT, DIAMOND))));
         final Cards cardsOfHenry = Cards.from(
-                new ArrayList<>(Arrays.asList(Card.of(9, 1), Card.of(6, 2))));
+                new ArrayList<>(Arrays.asList(Card.of(NINE, SPADE), Card.of(SIX, DIAMOND))));
         final Cards cardsOfDealer = Cards.from(
-                new ArrayList<>(Arrays.asList(Card.of(11, 1), Card.of(7, 1))));
+                new ArrayList<>(Arrays.asList(Card.of(Q, SPADE), Card.of(SEVEN, SPADE))));
         final Queue<Cards> initialCards = new LinkedList<>(Arrays.asList(cardsOfChris, cardsOfBrandon, cardsOfHenry, cardsOfDealer));
 
         @Override
@@ -30,7 +32,7 @@ class GameTest {
         }
 
         final Queue<Card> additionalCards = new LinkedList<>(
-                Arrays.asList(Card.of(8, 4), Card.of(4, 4)));
+                Arrays.asList(Card.of(EIGHT, CLOVER), Card.of(FOUR, CLOVER)));
 
         @Override
         public Card provideNewCard() {
@@ -62,7 +64,7 @@ class GameTest {
         game.giveNewCardTo("Brandon");
         Cards actualCardsOfBrandon = game.getCardsOf("Brandon");
         Cards expectedCardsOfBrandon = Cards.from(Arrays.asList(
-                Card.of(7, 1), Card.of(8, 2), Card.of(8, 4)));
+                Card.of(SEVEN, SPADE), Card.of(EIGHT, DIAMOND), Card.of(EIGHT, CLOVER)));
         assertThat(actualCardsOfBrandon).isEqualTo(expectedCardsOfBrandon);
     }
 

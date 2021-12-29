@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static model.card.vo.TrumpNumber.A;
+import static model.card.vo.TrumpNumber.TWO;
+import static model.card.vo.TrumpShape.DIAMOND;
+import static model.card.vo.TrumpShape.SPADE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CardDeckTest {
     private CardDeck cardProvider;
     private final List<Card> providedCards = new ArrayList<>();
-    private final int[] indices = new int[]{1, 1, 2, 2};
+    private final int[] indices = new int[]{0, 0, 1, 1};
     private int orderOfIndices = 0;
 
     @BeforeEach
@@ -35,15 +39,18 @@ class CardDeckTest {
     @Test
     @DisplayName("초기 카드 2장을 반환한다.")
     void provideInitialCards() {
-        Cards initialCards = cardProvider.provideInitialCards();
-        assertThat(initialCards.getCards()).isEqualTo(Arrays.asList(Card.of(1, 1), Card.of(2, 2)));
+        Cards actualInitialCards = cardProvider.provideInitialCards();
+        Card expectedFirstCard = Card.of(A, SPADE);
+        Card expectedSecondCard = Card.of(TWO, DIAMOND);
+        Cards expectedInitialCards = Cards.from(Arrays.asList(expectedFirstCard, expectedSecondCard));
+        assertThat(actualInitialCards).isEqualTo(expectedInitialCards);
     }
 
     @Test
     @DisplayName("이미 제공되지 않은 랜덤 카드를 반환한다.")
     void provide() {
-        providedCards.add(Card.of(1, 1));
+        providedCards.add(Card.of(A, SPADE));
         Card card = cardProvider.provideNewCard();
-        assertThat(card).isEqualTo(Card.of(2, 2));
+        assertThat(card).isEqualTo(Card.of(TWO, DIAMOND));
     }
 }
