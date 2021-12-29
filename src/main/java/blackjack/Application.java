@@ -1,10 +1,10 @@
 package blackjack;
 
 import controller.BlackJackController;
-import view.InputDisplay;
-import view.InputView;
-import view.OutputDisplay;
-import view.OutputView;
+import view.input.InputDisplay;
+import view.input.InputView;
+import view.output.OutputDisplay;
+import view.output.OutputView;
 
 import java.util.Scanner;
 

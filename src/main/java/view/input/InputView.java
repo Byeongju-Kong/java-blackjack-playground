@@ -1,4 +1,4 @@
-package view;
+package view.input;
 
 public interface InputView {
     String[] inputPlayerNames();

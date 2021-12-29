@@ -1,4 +1,4 @@
-package view;
+package view.output;
 
 import model.card.Cards;
 import model.card.vo.Card;
