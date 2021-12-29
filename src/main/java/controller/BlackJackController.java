@@ -2,14 +2,17 @@ package controller;
 
 import model.card.CardDeck;
 import model.game.Game;
-import view.InputView;
-import view.OutputView;
+import view.input.InputView;
+import view.input.vo.DrawingNewCard;
+import view.output.OutputView;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static view.input.vo.DrawingNewCard.YES;
 
 public class BlackJackController {
     private static final String REFERENCE_VALUE_OF_DEALER = "Dealer";
@@ -57,7 +60,7 @@ public class BlackJackController {
     }
 
     private void playTurnOf(final String name) {
-        while (game.canGiveNewCardTo(name) && inputView.inputDrawingNewCard(name) == 'y') {
+        while (game.canGiveNewCardTo(name) && DrawingNewCard.of(inputView.inputDrawingNewCard(name)) == YES) {
             game.giveNewCardTo(name);
             outputView.showCardsOf(name, game.getCardsOf(name));
         }
