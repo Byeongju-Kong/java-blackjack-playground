@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerTest {
     private final Cards initialCards = Cards.from(
-            new ArrayList<>(Arrays.asList(Card.of(8, 1), Card.of(10, 3))));
+            new ArrayList<>(Arrays.asList(Card.of(EIGHT, SPADE), Card.of(J, HEART))));
     private final Player player = Player.of("Chris", 10000, initialCards);
 
     @ParameterizedTest
@@ -38,12 +40,12 @@ class PlayerTest {
     @Test
     @DisplayName("카드를 한장 추가한다.")
     void draw() {
-        Card newCard = Card.of(3, 2);
+        Card newCard = Card.of(THREE, DIAMOND);
         player.draw(newCard);
         Cards actual = player.getCards();
         Cards expected = Cards.from(
-                Arrays.asList(Card.of(8, 1), Card.of(10, 3),
-                        Card.of(3, 2)));
+                Arrays.asList(Card.of(EIGHT, SPADE), Card.of(J, HEART),
+                        Card.of(THREE, DIAMOND)));
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -59,9 +61,9 @@ class PlayerTest {
     private static Stream<Arguments> provideInitialCardsAndCanDrawCards() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(1, 2), Card.of(9, 2))), true),
+                        Card.of(A, DIAMOND), Card.of(NINE, DIAMOND))), true),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(1, 2), Card.of(10, 2))), false)
+                        Card.of(A, DIAMOND), Card.of(J, DIAMOND))), false)
         );
     }
 
@@ -85,21 +87,21 @@ class PlayerTest {
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(8, 1), Card.of(9, 4))), 10000),
+                        Card.of(EIGHT, SPADE), Card.of(NINE, CLOVER))), 10000),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 1), Card.of(9, 4))), -10000)
+                        Card.of(J, SPADE), Card.of(NINE, CLOVER))), -10000)
         );
     }
 
     private final Cards anotherCards = Cards.from(
-            Arrays.asList(Card.of(1, 3), Card.of(7, 3)));
+            Arrays.asList(Card.of(A, HEART), Card.of(SEVEN, HEART)));
 
     @ParameterizedTest
     @DisplayName("stay 상태에서, 딜러의 카드를 받아 자신의 카드와 비교 후, 수익을 반환한다.")
     @MethodSource("provideCardsAndExpectedProfit")
     void getProfitAgainst(final Cards cards, final int expectedProfit) {
         Player player = Player.of("Chris", 10000, cards);
-        Cards dealerCards = Cards.from(Arrays.asList(Card.of(8, 2), Card.of(9, 3)));
+        Cards dealerCards = Cards.from(Arrays.asList(Card.of(EIGHT, DIAMOND), Card.of(NINE, HEART)));
         player.stay();
         double actualProfit = player.getProfitAgainst(dealerCards);
         assertThat(actualProfit).isEqualTo(expectedProfit);
@@ -107,9 +109,9 @@ class PlayerTest {
 
     private static Stream<Arguments> provideCardsAndExpectedProfit() {
         return Stream.of(
-                Arguments.of(Cards.from(Arrays.asList(Card.of(6, 4), Card.of(10, 2))),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(SIX, CLOVER), Card.of(J, DIAMOND))),
                         -10000),
-                Arguments.of(Cards.from(Arrays.asList(Card.of(8, 4), Card.of(10, 2))),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(EIGHT, CLOVER), Card.of(J, DIAMOND))),
                         10000)
         );
     }

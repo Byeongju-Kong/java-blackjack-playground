@@ -12,11 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CardsTest {
     private final List<Card> initialCards =
-            new ArrayList<>(Arrays.asList(Card.of(1, 1), Card.of(2, 1)));
+            new ArrayList<>(Arrays.asList(Card.of(A, SPADE), Card.of(TWO, SPADE)));
 
     @Test
     @DisplayName("카드들을 반환한다.")
@@ -39,11 +41,10 @@ class CardsTest {
     @DisplayName("새 카드를 뽑는다.")
     void draw() {
         Cards cards = Cards.from(initialCards);
-        Card eight = Card.of(8, 1);
+        Card eight = Card.of(EIGHT, SPADE);
         cards.add(eight);
         Cards expected = Cards.from(
-                Arrays.asList(Card.of(1, 1), Card.of(2, 1),
-                        Card.of(8, 1)));
+                Arrays.asList(Card.of(A, SPADE), Card.of(TWO, SPADE), Card.of(EIGHT, SPADE)));
         assertThat(cards).isEqualTo(expected);
     }
 
@@ -58,9 +59,9 @@ class CardsTest {
 
     private static Stream<Arguments> provideCardsAndLowerThan16() {
         return Stream.of(
-                Arguments.of(Arrays.asList(Card.of(8, 1), Card.of(9, 1)),
+                Arguments.of(Arrays.asList(Card.of(EIGHT, SPADE), Card.of(NINE, SPADE)),
                         false),
-                Arguments.of(Arrays.asList(Card.of(7, 1), Card.of(9, 1)),
+                Arguments.of(Arrays.asList(Card.of(SEVEN, SPADE), Card.of(NINE, SPADE)),
                         true)
         );
     }
@@ -76,10 +77,10 @@ class CardsTest {
 
     private static Stream<Arguments> provideCardsAndHigherThan21() {
         return Stream.of(
-                Arguments.of(Arrays.asList(Card.of(8, 1), Card.of(9, 1),
-                        Card.of(7, 3)), true),
-                Arguments.of(Arrays.asList(Card.of(7, 1), Card.of(9, 1),
-                        Card.of(2, 3)), false)
+                Arguments.of(Arrays.asList(Card.of(EIGHT, SPADE), Card.of(NINE, SPADE),
+                        Card.of(SEVEN, HEART)), true),
+                Arguments.of(Arrays.asList(Card.of(SEVEN, SPADE), Card.of(NINE, SPADE),
+                        Card.of(TWO, HEART)), false)
         );
     }
 
@@ -94,12 +95,12 @@ class CardsTest {
 
     private static Stream<Arguments> provideCardsAndTwoCardOf21() {
         return Stream.of(
-                Arguments.of(Arrays.asList(Card.of(1, 1), Card.of(10, 1)),
+                Arguments.of(Arrays.asList(Card.of(A, SPADE), Card.of(J, SPADE)),
                         true),
-                Arguments.of(Arrays.asList(Card.of(3, 1), Card.of(10, 1)),
+                Arguments.of(Arrays.asList(Card.of(THREE, SPADE), Card.of(J, SPADE)),
                         false),
-                Arguments.of(Arrays.asList(Card.of(8, 1), Card.of(9, 1),
-                        Card.of(4, 3)), false)
+                Arguments.of(Arrays.asList(Card.of(EIGHT, SPADE), Card.of(NINE, SPADE),
+                        Card.of(FOUR, HEART)), false)
         );
     }
 
@@ -107,7 +108,7 @@ class CardsTest {
     @DisplayName("카드를 받아 자신의 카드와 합이 같은지 반환한다.")
     void hasSameSumOfCardValues() {
         Cards cards = Cards.from(initialCards);
-        Cards anotherCards = Cards.from(Arrays.asList(Card.of(6, 3), Card.of(7, 2)));
+        Cards anotherCards = Cards.from(Arrays.asList(Card.of(SIX, HEART), Card.of(SEVEN, DIAMOND)));
         boolean actual = cards.hasSameSum(anotherCards);
         assertThat(actual).isTrue();
     }
@@ -116,9 +117,9 @@ class CardsTest {
     @DisplayName("Cards 객체를 받아 자신의 카드합 보다 작은지 반환한다.")
     void hasHigherSumOfCardValuesThan() {
         Cards firstCards =
-                Cards.from(Arrays.asList(Card.of(1, 1), Card.of(8, 1)));
+                Cards.from(Arrays.asList(Card.of(A, SPADE), Card.of(EIGHT, SPADE)));
         Cards secondCards =
-                Cards.from(Arrays.asList(Card.of(2, 1), Card.of(8, 1)));
+                Cards.from(Arrays.asList(Card.of(TWO, SPADE), Card.of(EIGHT, SPADE)));
         boolean actual = firstCards.hasHigherSumOfCardValuesThan(secondCards);
         assertThat(actual).isTrue();
     }
@@ -127,9 +128,9 @@ class CardsTest {
     @DisplayName("Cards 객체를 받아 카드들을 기준으로 같은지 반환한다.")
     void equals() {
         Cards firstCards =
-                Cards.from(Arrays.asList(Card.of(1, 1), Card.of(8, 1)));
+                Cards.from(Arrays.asList(Card.of(A, SPADE), Card.of(EIGHT, SPADE)));
         Cards secondCards =
-                Cards.from(Arrays.asList(Card.of(1, 1), Card.of(8, 1)));
+                Cards.from(Arrays.asList(Card.of(A, SPADE), Card.of(EIGHT, SPADE)));
         assertThat(firstCards).isEqualTo(secondCards);
     }
 }

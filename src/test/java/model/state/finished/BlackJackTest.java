@@ -12,18 +12,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class BlackJackTest {
     private final Cards initialCards = Cards.from(
-            Arrays.asList(Card.of(1, 1), Card.of(10, 2)));
+            Arrays.asList(Card.of(A, SPADE), Card.of(J, DIAMOND)));
     private final State state = new BlackJack(initialCards);
 
     @Test
     @DisplayName("draw 메서드를 호출하면 예외를 발생시킨다.")
     void draw() {
-        Card newCard = Card.of(1, 1);
+        Card newCard = Card.of(A, SPADE);
         assertThatIllegalArgumentException().isThrownBy(() -> state.draw(newCard))
                 .withMessage("이미 Bust or Stay or BlackJack 상태입니다.");
     }
@@ -53,8 +55,8 @@ class BlackJackTest {
 
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
-                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(1, 3))), 0),
-                Arguments.of(Cards.from(Arrays.asList(Card.of(10, 2), Card.of(2, 3))), 15000)
+                Arguments.of(Cards.from(Arrays.asList(Card.of(J, DIAMOND), Card.of(A, HEART))), 0),
+                Arguments.of(Cards.from(Arrays.asList(Card.of(J, DIAMOND), Card.of(TWO, HEART))), 15000)
         );
     }
 }

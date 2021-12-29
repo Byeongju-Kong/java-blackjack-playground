@@ -11,21 +11,24 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.DIAMOND;
+import static model.card.vo.TrumpShape.SPADE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class HitTest {
     private final Cards initialCards = Cards.from(new ArrayList<>(
-            Arrays.asList(Card.of(7, 1), Card.of(8, 2))));
+            Arrays.asList(Card.of(SEVEN, SPADE), Card.of(EIGHT, DIAMOND))));
     private final State state = new Hit(initialCards);
 
     @Test
     @DisplayName("draw로 새 카드를 추가하여 Bust가 발생하지 않으면 새로운 Hit 객체를 반환한다.")
     void draw_newHit() {
-        Card newCard = Card.of(5, 1);
+        Card newCard = Card.of(FIVE, SPADE);
         State actualStateAfterDraw = state.draw(newCard);
         Cards expectedCards = Cards.from(Arrays.asList(
-                        Card.of(7, 1), Card.of(8, 2), Card.of(5, 1)));
+                        Card.of(SEVEN, SPADE), Card.of(EIGHT, DIAMOND), Card.of(FIVE, SPADE)));
         State expectedStateAfterDraw = new Hit(expectedCards);
         assertThat(actualStateAfterDraw).isEqualTo(expectedStateAfterDraw);
     }
@@ -33,10 +36,10 @@ class HitTest {
     @Test
     @DisplayName("draw로 새 카드를 추가하여 Bust가 발생하면 새로운 Bust 객체를 반환한다.")
     void draw_Bust() {
-        Card newCard = Card.of(9, 1);
+        Card newCard = Card.of(NINE, SPADE);
         State actualStateAfterDraw = state.draw(newCard);
         Cards expectedCards = Cards.from(Arrays.asList(
-                Card.of(7, 1), Card.of(8, 2), Card.of(9, 1)));
+                Card.of(SEVEN, SPADE), Card.of(EIGHT, DIAMOND), Card.of(NINE, SPADE)));
         State expectedStateAfterDraw = new Bust(expectedCards);
         assertThat(actualStateAfterDraw).isEqualTo(expectedStateAfterDraw);
     }
@@ -66,7 +69,7 @@ class HitTest {
     @Test
     @DisplayName("Hit 상태에서 profit 메소드를 호출하면 예외를 발생시킨다.")
     void profit() {
-        Cards dealerCards = Cards.from(Arrays.asList(Card.of(1, 1), Card.of(2, 1)));
+        Cards dealerCards = Cards.from(Arrays.asList(Card.of(A, SPADE), Card.of(TWO, SPADE)));
         assertThatIllegalArgumentException().isThrownBy(() -> state.profit(10000, dealerCards))
                 .withMessage("아직 Hit 상태라 수익을 알 수 없습니다.");
     }

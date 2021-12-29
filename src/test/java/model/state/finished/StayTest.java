@@ -12,18 +12,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static model.card.vo.TrumpNumber.*;
+import static model.card.vo.TrumpShape.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StayTest {
     private final Cards initialCards = Cards.from(
-            Arrays.asList(Card.of(10, 1), Card.of(8, 2)));
+            Arrays.asList(Card.of(J, SPADE), Card.of(EIGHT, DIAMOND)));
     private final State state = new Stay(initialCards);
 
     @Test
     @DisplayName("draw 메서드를 호출하면, 더 이상 카드를 뽑을 수 없기 때문에 자기 자신을 반환한다.")
     void draw() {
-        Card newCard = Card.of(1, 1);
+        Card newCard = Card.of(A, SPADE);
         assertThatIllegalArgumentException().isThrownBy(() -> state.draw(newCard))
                 .withMessage("이미 Bust or Stay or BlackJack 상태입니다.");
     }
@@ -54,16 +56,16 @@ class StayTest {
     private static Stream<Arguments> provideDealerCardsAndExpectedProfit() {
         return Stream.of(
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 2), Card.of(1, 2))), -10000),
+                        Card.of(J, DIAMOND), Card.of(A, DIAMOND))), -10000),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 2), Card.of(8, 3))), 0),
+                        Card.of(J, DIAMOND), Card.of(EIGHT, HEART))), 0),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 3), Card.of(9, 2))), -10000),
+                        Card.of(J, HEART), Card.of(NINE, DIAMOND))), -10000),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 3), Card.of(7, 2))), 10000),
+                        Card.of(J, HEART), Card.of(SEVEN, DIAMOND))), 10000),
                 Arguments.of(Cards.from(Arrays.asList(
-                        Card.of(10, 3),
-                        Card.of(5, 3), Card.of(7, 4))), 10000)
+                        Card.of(J, HEART),
+                        Card.of(FIVE, HEART), Card.of(SEVEN, CLOVER))), 10000)
         );
     }
 }
