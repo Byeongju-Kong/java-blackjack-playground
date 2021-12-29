@@ -7,9 +7,4 @@ public enum TrumpShape {
     TrumpShape(final String value) {
         this.value = value;
     }
-
-    @Override
-    public String toString() {
-        return value;
-    }
 }

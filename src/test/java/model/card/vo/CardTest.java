@@ -24,7 +24,7 @@ class CardTest {
     void toString_provideCardInfo() {
         Card card = Card.of(A, SPADE);
         String actual = card.toString();
-        String expected = "A스페이드";
+        String expected = "A-SPADE";
         assertThat(actual).isEqualTo(expected);
     }
 
